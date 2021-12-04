@@ -1,0 +1,10 @@
+.prod__detail__main {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+}
+.css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected {
+  color: rgb(255, 183, 49) !important;
+}
+.css-1aquho2-MuiTabs-indicator {
+  background-color: rgb(255, 183, 49) !important;
+}

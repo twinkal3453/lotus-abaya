@@ -1,0 +1,73 @@
+.rating__main h6 {
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  color: rgb(66, 66, 66);
+}
+.rating__main__data {
+  padding: 2rem 0;
+  display: grid;
+  grid-template-columns: 1fr 3fr 2fr;
+  grid-gap: 1rem;
+}
+.rat_ing {
+  margin-bottom: 0;
+  font-size: 1.4rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+.rat_ings {
+  font-size: 1rem;
+}
+.rating__people p {
+  color: rgb(65, 65, 65);
+}
+.five__star p {
+  font-size: 1.05rem;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+.five__star {
+  margin-right: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.five__star__rating {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.rating__button button {
+  outline: none;
+  padding: 0.6rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  float: right;
+  border-radius: 12px;
+  border: none;
+  background-color: rgb(255, 210, 126);
+  box-shadow: 2px 2px 3px 1px rgb(219, 219, 219);
+}
+.review__text {
+  font-size: 1rem;
+  text-align: center;
+  text-transform: uppercase;
+  color: grey;
+  font-weight: 500;
+  padding: 1rem 1rem 0 1rem;
+  margin-bottom: 0;
+}
+.textarea__input {
+  margin-top: 2rem;
+  border: 1px solid rgb(196, 196, 196);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  outline: none;
+}
+
+@media only screen and (max-width: 770px) {
+  .rating__main__data {
+    grid-template-columns: 1fr;
+  }
+}

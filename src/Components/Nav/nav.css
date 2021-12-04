@@ -1,0 +1,153 @@
+.main__main__header {
+  background: rgb(243, 243, 248);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  margin-bottom: 1rem;
+}
+.nav__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.main__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ant-drawer-header {
+  background-color: rgb(255, 190, 92) !important;
+}
+
+.ant-drawer-title {
+  color: white;
+}
+.anticon svg {
+  color: white;
+}
+
+.ant-btn-primary {
+  background-color: rgb(255, 190, 92);
+  border-color: rgb(255, 190, 92) !important;
+}
+
+.slider__buttton {
+  border: none;
+  background-color: transparent;
+  padding: 2rem;
+  border-radius: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+}
+
+.slider__buttton i {
+  font-size: 1.3rem;
+  color: rgb(62, 62, 73);
+}
+
+.right__side {
+  display: flex;
+  align-items: center;
+}
+
+.right__side > div {
+  margin: 1rem 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.heart_svg path {
+  fill: #fff;
+}
+
+.right__side > div > i {
+  color: rgb(62, 62, 73);
+  font-size: 1.3rem;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+}
+.wishlist {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cart__login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.search__modal {
+  width: 100%;
+  border: none;
+  outline: none;
+}
+.search__input {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border: 2px solid rgb(218, 218, 218);
+  padding: 0.5rem;
+  border-radius: 2rem;
+}
+.search__input i {
+  margin: 0 1rem;
+  color: rgb(145, 145, 145);
+}
+.drawer__button button {
+  background: none;
+  width: 100%;
+  border: none;
+  padding: 0.5rem 0;
+  font-size: 1rem;
+  transition: 0.3s;
+  border-radius: 3px;
+  color: rgb(62, 62, 73);
+  font-weight: 500;
+  outline: none;
+}
+.drawer__button button:hover {
+  background: rgb(243, 243, 243);
+}
+.drawer__logout button {
+  background: rgb(255, 190, 92);
+  color: white;
+  width: 100%;
+  border: none;
+  padding: 0.5rem 0;
+  font-size: 1rem;
+  transition: 0.3s;
+  border-radius: 3px;
+  font-weight: 500;
+  outline: none;
+  text-transform: uppercase;
+}
+
+.sec__drawer {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+@media only screen and (max-width: 600px) {
+  .main__header {
+    flex-direction: column-reverse;
+  }
+  .right__side > div {
+    margin: 1rem 1.2rem 0rem 1.2rem;
+  }
+
+  .nav__bar {
+    width: 100%;
+    justify-content: space-between !important;
+  }
+
+  .slider__buttton {
+    padding: 1rem;
+  }
+}

@@ -1,0 +1,81 @@
+.user__avatar {
+  border-radius: 5rem;
+  padding: 0.7rem;
+  background: white;
+  width: 300px;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+}
+.avatar__user__cont {
+  margin-left: 0.7rem;
+}
+
+.avatar__user__cont p {
+  margin-bottom: 0;
+}
+.avatar__user__cont h5 {
+  margin-bottom: 0;
+}
+.wishlist__card {
+  background-color: white;
+}
+.user__wishlist {
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 1px;
+}
+.wish__count {
+  padding: 0.7rem 1rem;
+  border-radius: 10px 10px 0 0;
+}
+.card__whole {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.7rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.card__whole:hover {
+  transform: scale(1.01);
+  box-shadow: 0 0 10px 1px rgba(128, 128, 128, 0.199);
+}
+.card__trash i {
+  font-size: 1.1rem;
+  margin: 0.5rem 1rem;
+  color: rgb(196, 196, 196);
+  cursor: pointer;
+  transition: 0.3s;
+}
+.card__trash i:hover {
+  color: rgb(255, 117, 117);
+}
+.card__main {
+  display: flex;
+  align-items: center;
+}
+.wish__card__cont {
+  margin-left: 1rem;
+}
+.wish__card__cont p {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+.wish__card__cont p span {
+  text-decoration: line-through;
+  color: grey;
+  margin-right: 0.5rem;
+}
+.discount__present {
+  font-size: 0.9rem;
+  margin: 0 0.5rem;
+  color: rgb(67, 102, 255) !important;
+  text-decoration: none !important;
+}
+.bottom_wish {
+  padding: 0.7rem 1rem;
+  border-radius: 0 0 10px 10px;
+  color: grey;
+  font-size: 1rem;
+}

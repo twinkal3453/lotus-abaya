@@ -1,0 +1,58 @@
+.userDetails {
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 1rem rgb(221, 221, 221);
+  padding: 1rem;
+}
+.user_sec {
+  padding: 1rem 0;
+  display: flex;
+  justify-content: center;
+}
+.user_det {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.user_det img {
+  width: 5rem;
+}
+.user_det h5 {
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  margin-bottom: 0;
+  text-align: center;
+  text-transform: uppercase;
+  color: rgb(42, 42, 63);
+}
+.personal__information {
+  margin-top: 1rem;
+}
+.personal__info__data {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.info__data {
+  margin-top: 0.5rem;
+}
+.info__data p {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: gray;
+  margin-bottom: 0;
+}
+.info__data p span {
+  color: rgb(42, 42, 63);
+  font-size: 1.3rem;
+  margin-left: 1rem;
+}
+.address__info {
+  font-size: 1rem;
+  font-weight: 400;
+}
+@media only screen and (max-width: 770px) {
+  .personal__info__data {
+    grid-template-columns: 1fr;
+  }
+}

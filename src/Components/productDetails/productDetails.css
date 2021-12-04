@@ -1,0 +1,227 @@
+.main__cont__prodDetails {
+  background: white;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  box-shadow: 0 0 6px 2px rgb(240, 240, 240);
+}
+.prodDetails__grid {
+  display: grid;
+  grid-template-columns: 3fr 4fr;
+  grid-gap: 1rem;
+}
+.prod__name__share {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.prod__name__detail h5 {
+  margin: 0.5rem 0;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  color: rgb(255, 165, 29);
+}
+.prod__name__detail h6 {
+  margin: 0.3rem 0;
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: rgb(126, 126, 126);
+}
+.prod__name__share__se {
+  display: flex;
+}
+.share__sec__wish {
+  color: grey;
+  height: 2.5rem;
+  width: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0.3rem;
+  background: rgb(240, 240, 240);
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.share__sec__wish:hover {
+  background: rgb(255, 217, 145);
+  color: white;
+  box-shadow: 2px 2px 4px 1px rgba(255, 209, 150, 0.397);
+}
+.share__sec__wish i {
+  font-size: 1.2rem;
+}
+.prod__description {
+  font-size: 1rem;
+  color: grey;
+  margin: 0.8rem 0;
+}
+.product__price {
+  font-size: 1.6rem;
+  margin: 1.2rem 0;
+  color: rgb(255, 111, 111);
+}
+.product__color p {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
+  font-size: 1.08rem;
+  margin-bottom: 0.5rem;
+  color: rgb(62, 60, 87);
+}
+.color_panel {
+  margin-left: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2.3rem;
+  width: 2.3rem;
+  border-radius: 0.7rem;
+  box-shadow: 2px 2px 3px 1px rgb(224, 224, 224);
+}
+.color_panel i {
+  font-size: 1.9rem;
+}
+.product__size {
+  margin-top: 1.2rem;
+}
+.product__size > p {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
+  font-size: 1.08rem;
+  color: rgb(62, 60, 87);
+}
+.size__panel {
+  display: flex;
+}
+
+.size__panels {
+  background: rgb(245, 245, 245);
+  padding: 0.5rem 1rem;
+  border-radius: 0.8rem;
+  transition: 0.3s;
+  color: grey;
+  cursor: pointer;
+  text-align: center;
+  margin-right: 1rem;
+}
+@media only screen and (max-width: 375px) {
+  .size__panel {
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.size__panels:hover {
+  background: rgb(255, 217, 145);
+  color: white;
+  box-shadow: 2px 2px 4px 1px rgba(255, 209, 150, 0.397);
+}
+.size__panels p {
+  text-transform: uppercase;
+  font-size: 1.05rem;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+.prod__select__item {
+  margin-top: 1.2rem;
+}
+.prod__select__item > p {
+  text-transform: uppercase;
+  font-size: 1.08rem;
+  font-weight: 500;
+  color: rgb(62, 60, 87);
+}
+.num__select {
+  padding: 0.7rem 1.2rem;
+  border: none;
+  border-radius: 0.8rem;
+  background: rgb(245, 245, 245);
+  outline: none;
+  color: grey;
+  font-weight: 500;
+  margin-left: 0.5rem;
+}
+.num__select:hover {
+  box-shadow: 2px 2px 3px 1px rgb(248, 248, 248);
+}
+.cart__buy {
+  display: flex;
+  margin-top: 1rem;
+}
+.cart__buy button {
+  text-transform: uppercase;
+  color: rgb(62, 60, 87);
+  font-weight: 500;
+  margin: 0 0.5rem;
+  padding: 0.8rem 1.5rem;
+  outline: none;
+  border-radius: 0.8rem;
+  border: none;
+  transition: 0.3s;
+}
+.addToCart__btn {
+  background: rgb(245, 245, 245);
+}
+.addToCart__btn:hover {
+  box-shadow: 2px 2px 3px 1px rgb(190, 190, 190);
+}
+.buyNow__btn {
+  background: rgb(255, 194, 82);
+}
+.buyNow__btn:hover {
+  box-shadow: 2px 2px 3px 1px rgba(255, 212, 132, 0.425);
+}
+.free__shipping {
+  margin-top: 1.9rem;
+  padding: 0.8rem 1rem;
+  width: 100%;
+  background: rgb(245, 245, 245);
+  border-radius: 0.8rem;
+  display: flex;
+  align-items: center;
+}
+.free__return {
+  margin-top: 3px;
+  padding: 0.8rem 1rem;
+  width: 100%;
+  background: rgb(245, 245, 245);
+  border-radius: 0.8rem;
+  display: flex;
+  align-items: center;
+}
+.free__shipping i {
+  margin: 0 1.3rem;
+  font-size: 1.3rem;
+  color: rgb(62, 60, 87);
+}
+.free__shipping p {
+  margin-bottom: 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: rgb(62, 60, 87);
+}
+.free__return i {
+  margin: 0 1.3rem;
+  font-size: 1.3rem;
+  color: rgb(62, 60, 87);
+}
+.free__return p {
+  margin-bottom: 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: rgb(62, 60, 87);
+}
+
+.tabs__details {
+  margin: 2rem 0;
+  background: rgb(245, 245, 245);
+  border-radius: 0.8rem;
+}
+
+@media only screen and (max-width: 990px) {
+  .prodDetails__grid {
+    grid-template-columns: 1fr;
+  }
+}

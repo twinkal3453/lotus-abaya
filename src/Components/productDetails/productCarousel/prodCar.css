@@ -1,0 +1,7 @@
+.prod__carousel {
+  padding: 0.5rem;
+}
+.prod__carousel img {
+  width: 100%;
+  box-shadow: 0 0 1rem 1px rgb(223, 223, 223);
+}

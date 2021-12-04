@@ -1,0 +1,52 @@
+.seasons {
+  padding: 4rem 0;
+}
+.season__div {
+  background: white;
+  padding: 1.2rem;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}
+.season__img img {
+  width: 100%;
+}
+.season__text {
+  display: flex;
+  align-items: center;
+}
+.season__text__inner {
+  padding: 0 1rem 1rem 3rem;
+}
+.season__text__inner h2 {
+  text-transform: uppercase;
+  font-weight: 400;
+  color: rgb(54, 53, 73);
+}
+.season__text__inner p {
+  margin: 2rem 0 3rem 0;
+  font-size: 1.1rem;
+  color: rgb(95, 95, 95);
+}
+.season__text__inner button {
+  padding: 0.8rem 2.5rem;
+  margin-bottom: 1rem;
+  outline: none;
+  border: 2px solid rgb(53, 53, 66);
+  background: none;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: 0.3s;
+  color: rgb(53, 53, 66);
+}
+.season__text__inner button:hover {
+  background: rgb(240, 240, 240);
+}
+
+@media only screen and (max-width: 574px) {
+  .season__text__inner {
+    padding: 0 1rem 1rem 0;
+  }
+  .season__div {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,26 @@
+.rate__user {
+  display: flex;
+  align-items: center;
+}
+.rate__name {
+  margin-left: 0.5rem;
+}
+.rate__name p {
+  margin-bottom: 0;
+}
+.rat_area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 1rem;
+  background-color: rgb(231, 231, 231);
+}
+.rating__area p {
+  margin-bottom: 0;
+}
+.desc {
+  padding: 0.8rem 0;
+  color: rgb(87, 87, 87);
+}

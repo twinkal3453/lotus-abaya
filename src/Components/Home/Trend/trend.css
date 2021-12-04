@@ -1,0 +1,66 @@
+.cont__parent {
+  width: 100%;
+  padding: 4rem 6rem 4rem 6rem;
+  background: rgb(58, 59, 80);
+}
+.cont__parent h1 {
+  font-size: 3.5rem;
+  font-weight: 400;
+  color: white;
+  letter-spacing: 5px;
+}
+.condition {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 2rem;
+  padding-top: 1rem;
+}
+.cond_latest {
+  background: white;
+  padding: 2rem;
+}
+.cond_latest i {
+  color: rgb(70, 72, 88);
+  font-size: 3rem;
+  margin: 0.5rem 0;
+}
+.cond_latest h5 {
+  font-size: 1.8rem;
+  color: rgb(70, 72, 88);
+  margin-top: 1rem;
+}
+.cond_latest p {
+  margin: 1.8rem 0;
+  font-size: 1rem;
+  font-weight: 400;
+  color: rgb(109, 109, 109);
+}
+.cond_latest h6 {
+  font-size: 1.2rem;
+  color: rgb(70, 72, 88);
+  cursor: pointer;
+}
+@media only screen and (max-width: 990px) {
+  .cont__parent {
+    padding: 4rem 2rem 2rem 2rem;
+  }
+  .cont__parent h1 {
+    font-size: 2.5rem;
+    letter-spacing: 3px;
+  }
+  .cond_latest {
+    padding: 1rem;
+  }
+}
+@media only screen and (max-width: 770px) {
+  .cont__parent h1 {
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+  }
+  .cond_latest {
+    padding: 1rem;
+  }
+  .condition {
+    grid-template-columns: 1fr;
+  }
+}

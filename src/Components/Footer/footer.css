@@ -1,0 +1,116 @@
+.main__footer {
+  padding: 3rem 0;
+}
+.main__footer {
+  display: grid;
+  grid-template-columns: 7fr 3fr;
+}
+.left__content {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+}
+.left__content__data {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.logo {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 1rem;
+}
+.icon_social {
+  display: flex;
+  justify-content: center;
+}
+.icon_social i {
+  font-size: 1.6rem;
+}
+.icons {
+  height: 2.5rem;
+  width: 2.5rem;
+  background: white;
+  margin: 0 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.icons:hover {
+  box-shadow: 2px 2px 3px 1px rgba(134, 134, 134, 0.692);
+}
+.footer__data ul {
+  padding-left: 0;
+}
+.footer__data ul li {
+  list-style: none;
+  cursor: pointer;
+}
+.search__box {
+  display: grid;
+  grid-template-columns: 5fr 2fr;
+  grid-gap: 1px;
+}
+.search__box input {
+  border: none;
+  outline: none;
+  background: white;
+  padding: 0.7rem;
+}
+.search__box button {
+  border: none;
+  outline: none;
+  background: rgb(255, 171, 61);
+  color: white;
+}
+.acceptance {
+  margin-top: 1rem;
+  display: grid;
+  grid-gap: 5px;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+.acceptance img {
+  width: 100%;
+}
+.rights {
+  padding: 1rem 0;
+  border-top: 1px solid white;
+}
+.rights p {
+  text-align: center;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+@media only screen and (max-width: 990px) {
+  .main__footer {
+    grid-template-columns: 1fr;
+    grid-gap: 1rem;
+  }
+}
+@media only screen and (max-width: 770px) {
+  .main__footer {
+    grid-template-columns: 1fr;
+  }
+  .left__content {
+    grid-template-columns: 1fr;
+    grid-gap: 1rem;
+  }
+  .left__content__data {
+    justify-items: center;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .left__content {
+    grid-gap: 2rem;
+  }
+  .left__content__data {
+    grid-template-columns: 1fr;
+    grid-gap: 0.5rem;
+    justify-items: center;
+  }
+  .footer__data {
+    text-align: center;
+  }
+}

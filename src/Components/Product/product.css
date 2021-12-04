@@ -1,0 +1,219 @@
+.prod__container {
+  padding: 3rem 0;
+  display: grid;
+  grid-template-columns: 2fr 7fr;
+  grid-gap: 1rem;
+}
+.prod__filter {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 0.5rem;
+}
+.prod__filter h6 {
+  margin-bottom: 0;
+}
+.filter__head {
+  background: white;
+  padding: 1.1rem 1rem;
+  border-radius: 10px 10px 0 0;
+}
+.filter__content {
+  background: white;
+}
+.filter__sections {
+  padding: 1rem;
+  border-bottom: 1px solid rgb(230, 230, 230);
+}
+.filter__sections h6 {
+  letter-spacing: 1px;
+}
+.slider__price {
+  margin-top: 1.5rem;
+}
+.slider__drops {
+  margin: 0 0.5rem 0.5rem 0.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+.minMax__bal {
+  padding: 0.3rem 1.5rem;
+  border: none;
+  border-radius: 5px;
+  background: rgba(128, 128, 128, 0.144);
+  outline: none;
+}
+.minMax__bal p {
+  margin-bottom: 0;
+}
+.check__boxes {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+.checked_box {
+  margin: 0.3rem 0.5rem;
+}
+.first__heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.filter__dropdown {
+  padding: 0.5rem 0.7rem;
+  border: none;
+  border-radius: 0.4rem;
+  transition: 0.2s;
+  outline: none;
+  color: grey;
+  font-weight: 500;
+}
+.filter__dropdown:hover {
+  box-shadow: 2px 2px 4px 1px rgba(194, 194, 194, 0.534);
+}
+
+/* product Details section */
+.prod__card__section {
+  margin: 1.5rem 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 1rem;
+}
+.prod__section__card {
+  padding: 0.7rem;
+  background: white;
+  border-radius: 10px;
+  transition: 0.3s;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+.prod__section__card:hover {
+  transform: translate(0, -8px);
+  box-shadow: 0 0.3rem 0.4rem 0.1rem rgba(161, 161, 161, 0.192);
+}
+.prod__section__card img {
+  width: 100%;
+  border-radius: 5px;
+}
+.spec__prod__discount {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0.4rem 0.8rem;
+  background: rgb(255, 145, 187);
+  border-radius: 10px 1rem 1rem 0;
+}
+.spec__prod__discount p {
+  margin-bottom: 0;
+  font-size: 0.8rem;
+  color: white;
+}
+.prod__name__price h6 {
+  margin: 0.3rem 0;
+  font-size: 1.1rem;
+}
+.prod__name__price p {
+  margin-bottom: 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: rgb(30, 32, 51);
+}
+.actual__price {
+  text-decoration: line-through;
+  color: grey;
+  margin-right: 0.2rem;
+  font-size: 0.8rem;
+  font-weight: normal;
+}
+.spec__prod__price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+.prod__cart__icon {
+  padding: 0.6rem 1.1rem;
+  background: rgb(255, 145, 187);
+  color: white;
+  border-radius: 0.9rem 0 0 0.9rem;
+  cursor: pointer;
+  transform: translate(5rem, 0);
+  transition: 1s;
+}
+.prod__cart__icon:hover {
+  box-shadow: -2px 2px 3px 1px rgba(255, 145, 187, 0.418);
+}
+.prod__section__card:hover .prod__cart__icon {
+  transform: translate(0, 0);
+}
+.spec__wish {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  transition: 0.6s;
+}
+.prod__section__card:hover .spec__wish {
+  transform: rotateY(180deg);
+}
+.prod__section__card:hover .spec__prod__wishlist {
+  background: rgb(241, 241, 241);
+  color: rgb(255, 145, 187);
+}
+.spec__prod__wishlist {
+  padding: 0.6rem 0.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(241, 241, 241, 0);
+  color: rgba(255, 145, 187, 0);
+  border-radius: 13px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.spec__prod__wishlist i {
+  font-size: 1rem;
+}
+
+@media only screen and (max-width: 990px) {
+  .prod__container {
+    grid-template-columns: 1fr;
+  }
+  .prod__card__section {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+@media only screen and (max-width: 770px) {
+  .prod__card__section {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .prod__card__section {
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 0.6rem;
+  }
+  .prod__name__price p {
+    font-size: 1rem;
+  }
+  .prod__name__price h6 {
+    margin: 0.3rem 0;
+    font-size: 1rem;
+  }
+  .actual__price {
+    font-size: 0.8rem;
+  }
+  .prod__section__card:hover {
+    transform: translate(0, -5px);
+  }
+  .actual__price {
+    margin-right: 0.3rem;
+  }
+  .spec__prod__discount {
+    padding: 0.4rem 0.7rem;
+  }
+  .spec__prod__discount p {
+    font-size: 0.7rem;
+  }
+  .prod__cart__icon {
+    padding: 0.5rem 0.8rem;
+  }
+}

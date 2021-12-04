@@ -1,0 +1,42 @@
+.logo__parents {
+  background: rgb(224, 224, 224);
+  padding: 12rem 0 4rem 0;
+}
+.logo__parents h1 {
+  font-size: 2.5rem;
+  font-weight: 400;
+  margin-left: 1rem;
+  margin-bottom: 2rem;
+}
+.logo__parent {
+  display: flex;
+  justify-content: space-between;
+  overflow: none;
+  overflow-y: hidden;
+  overflow-x: scroll;
+}
+.logo__parent::-webkit-scrollbar {
+  display: none;
+}
+.logo__card {
+  border-radius: 0.6rem;
+  margin: 0 1.5rem;
+  height: 7rem;
+  width: 13rem;
+  background: white;
+}
+.logo__card img {
+  border-radius: 0.6rem;
+  width: 100%;
+  height: 7rem;
+  width: 13rem;
+}
+
+@media only screen and (max-width: 770px) {
+  .logo__parents {
+    padding: 3rem 0;
+  }
+  .logo__parents h1 {
+    font-size: 1.8rem;
+  }
+}

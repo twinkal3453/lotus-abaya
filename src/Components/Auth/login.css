@@ -1,0 +1,128 @@
+.login__sec {
+  position: relative;
+  background: white;
+  padding: 3rem 0;
+}
+.login__container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  background-color: white;
+  box-shadow: 0 0 1rem rgb(230, 230, 230);
+}
+.login__pic {
+  padding: 2rem 0;
+  background: rgb(255, 185, 80);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logi__sec {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.logi__sec img {
+  width: 50%;
+}
+.login__sec__input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.login__sec__input {
+  padding: 3rem 2rem;
+}
+.login__sec__input i {
+  font-size: 2.5rem;
+  color: rgb(38, 38, 51);
+}
+.login__sec__input h4 {
+  color: rgb(38, 38, 51);
+  font-size: 1.8rem;
+}
+.logi__inputs {
+  background: rgb(255, 185, 80);
+  width: 50%;
+  padding: 2rem;
+  margin: 0.5rem 0;
+  border-radius: 1.5rem;
+  box-shadow: 0 0 0.3rem rgb(240, 171, 69);
+}
+.logi__inputs input {
+  margin: 0.5rem 0;
+  width: 100%;
+  padding: 0.7rem 0.5rem;
+  border: none;
+  outline: none;
+  border-radius: 0.9rem;
+  box-shadow: -2px 2px 3px rgb(202, 140, 46);
+}
+.logi__button {
+  display: flex;
+  justify-content: flex-end;
+}
+.logi__inputs button {
+  background: rgb(87, 146, 255);
+  color: white;
+  margin-top: 0.8rem;
+  width: 50%;
+  padding: 0.5rem 2rem;
+  border-radius: 0.8rem;
+  border: none;
+  box-shadow: -2px 2px 3px rgb(202, 140, 46);
+  transition: 0.3s;
+  outline: none;
+}
+.logi__inputs button:hover {
+  color: rgb(87, 146, 255);
+  background: white;
+}
+.logi__inputs p {
+  font-size: 0.8rem;
+  text-align: right;
+  color: white;
+  margin: 0.3rem 0;
+}
+.login__social {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+.log__facebook {
+  margin: 0 0.4rem;
+  padding: 0.4rem;
+  background: white;
+  border-radius: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.log__facebook:hover {
+  box-shadow: -2px 2px 2px rgb(202, 140, 46);
+}
+
+.log__facebook img {
+  width: 1.5rem;
+}
+@media only screen and (max-width: 990px) {
+  .logi__inputs {
+    width: 80%;
+  }
+}
+@media only screen and (max-width: 770px) {
+  .login__container {
+    grid-template-columns: 1fr;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .login__container {
+    grid-template-columns: 1fr;
+  }
+  .logi__inputs {
+    width: 100%;
+  }
+}
