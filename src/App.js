@@ -15,13 +15,12 @@ import StepLogin from "./Components/Stepper/StepLogin";
 import Login from "./Components/Auth/Login";
 import SignUp from "./Components/Auth/SignUp";
 import { isAuthenticated } from "./Components/Auth/helper/index";
-import { useDispatch, useSelector } from "react-redux";
-import { login, logout, selectUser } from "./features/userSlice";
+import { useDispatch } from "react-redux";
+import { login, logout } from "./features/userSlice";
 import User from "./Components/User/User";
 import PrivateRoute from "./Components/Auth/helper/PrivateRoutes";
 
 function App() {
-  const userData = useSelector(selectUser);
   const dispatch = useDispatch();
   const { user, token } = isAuthenticated();
 
@@ -38,11 +37,11 @@ function App() {
       // logout
       dispatch(logout());
     }
-  }, [dispatch]);
+  }, [dispatch, token, user]);
 
   return (
     <div className="App">
-      <Router>
+      <Router basename="/">
         <ScrollToTop />
         <Nav />
         <div>

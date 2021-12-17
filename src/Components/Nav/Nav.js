@@ -7,8 +7,8 @@ import lens from "../../assets/lens.svg";
 import { Drawer, Modal, Divider, Badge } from "antd";
 import "./nav.css";
 import { signout, isAuthenticated } from "../Auth/helper/index";
-import { useDispatch, useSelector } from "react-redux";
-import { logout, selectUser } from "../../features/userSlice";
+import { useDispatch } from "react-redux";
+import { logout } from "../../features/userSlice";
 
 const linkStyle = {
   color: "rgb(62, 62, 73)",
@@ -16,7 +16,6 @@ const linkStyle = {
 };
 
 const Nav = ({ history }) => {
-  const userData = useSelector(selectUser);
   const dispatch = useDispatch();
   const [visible, setVisible] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -42,7 +41,6 @@ const Nav = ({ history }) => {
   };
 
   const { user } = isAuthenticated();
-  // console.log(user);
 
   return (
     <>

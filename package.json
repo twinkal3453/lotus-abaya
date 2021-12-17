@@ -2,6 +2,7 @@
   "name": "lotus-frontend",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://oursite.ga",
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@emotion/react": "^11.5.0",

@@ -1,59 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./category.css";
-import abaya from "../../../assets/category/abaya.jpg";
-import burqa from "../../../assets/category/burqa.jpg";
-import hijab from "../../../assets/category/hijab.jpg";
-import niqab from "../../../assets/category/niqab.jpg";
-import almira from "../../../assets/category/al-amira-cate.jpg";
-import shayla from "../../../assets/category/shayla.jpg";
-import khamir from "../../../assets/category/khimar.jpg";
-import jilbab from "../../../assets/category/zilbab.jpg";
+import axios from "../../../axios";
+import { PATH } from "../../../backend";
 
-const categoryData = [
-  {
-    category: abaya,
-    name: "Abaya",
-  },
-  {
-    category: burqa,
-    name: "Burqa",
-  },
-  {
-    category: hijab,
-    name: "Hijab",
-  },
-  {
-    category: niqab,
-    name: "Niqab",
-  },
-  {
-    category: almira,
-    name: "Al-almira",
-  },
-  {
-    category: shayla,
-    name: "Shayla",
-  },
-  {
-    category: khamir,
-    name: "Khimar",
-  },
-  {
-    category: jilbab,
-    name: "Zilbab",
-  },
-];
+// redux
+import { useDispatch, useSelector } from "react-redux";
+import { categoryList, selectCategory } from "../../../features/categorySlice";
 
 const Categories = () => {
+  const categoryDate = useSelector(selectCategory);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    async function fetchData() {
+      const req = await axios.get("/categories");
+      dispatch(categoryList(req.data));
+    }
+    fetchData();
+  }, [dispatch]);
+
   return (
     <div className="container category__sec">
       <h1>Categories</h1>
       <div className="cate_fiels">
-        {categoryData.map((item, index) => {
+        {categoryDate.map((item, index) => {
           return (
             <Link to="/product" className="div__cate" key={index}>
-              <img src={item.category} alt="" />
+              <img src={`${PATH}/${item.photo}`} alt="" />
               <div className="cate_text">
                 <p>{item.name}</p>
               </div>

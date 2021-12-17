@@ -10,8 +10,8 @@ import loginImage from "../../assets/login.svg";
 import search from "../../assets/search.png";
 import facebook from "../../assets/facebook.png";
 
-import { useDispatch, useSelector } from "react-redux";
-import { login, selectUser } from "../../features/userSlice";
+import { useDispatch } from "react-redux";
+import { login } from "../../features/userSlice";
 
 import { signin, authenticate, isAuthenticated } from "./helper";
 
@@ -20,7 +20,6 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 });
 
 const Login = () => {
-  const userData = useSelector(selectUser);
   const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
   const [values, setValues] = useState({
