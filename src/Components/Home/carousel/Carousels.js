@@ -26,13 +26,14 @@ const Carousels = () => {
   return (
     <div>
       <Carousel autoplay autoplaySpeed={5000}>
-        {carouselData.map((item, index) => {
-          return (
-            <div key={index}>
-              <img style={imageStyle} src={`${PATH}/${item.photo}`} alt="" />
-            </div>
-          );
-        })}
+        {carouselData &&
+          carouselData.map((item, index) => {
+            return (
+              <div key={index}>
+                <img style={imageStyle} src={`${PATH}/${item.photo}`} alt="" />
+              </div>
+            );
+          })}
       </Carousel>
     </div>
   );

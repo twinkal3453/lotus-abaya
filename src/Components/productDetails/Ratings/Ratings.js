@@ -20,7 +20,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 const Ratings = () => {
   const [RateIt, setRateIt] = useState(2);
   const [open, setOpen] = useState(false);
-  console.log(RateIt);
 
   const handleClickOpen = () => {
     setOpen(true);

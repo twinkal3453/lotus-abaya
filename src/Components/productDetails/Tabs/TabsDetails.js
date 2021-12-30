@@ -40,7 +40,7 @@ function a11yProps(index) {
   };
 }
 
-const TabsDetails = () => {
+const TabsDetails = ({ details }) => {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -60,52 +60,32 @@ const TabsDetails = () => {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolore error
-          laborum, aspernatur quidem corrupti aperiam molestiae ipsum culpa
-          dolorem facere natus consequuntur, incidunt optio debitis porro ex
-          asperiores. Consectetur, rerum!
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet
-          consequatur ea laudantium esse rerum illo maxime autem repellendus, in
-          omnis excepturi debitis, quod aliquid repudiandae voluptatem quo
-          veniam quas? Magni fugiat temporibus tempora sapiente consequatur
-          tenetur atque nemo voluptatum? Saepe.
-        </p>
+        <p className="product__description">{details.description}</p>
       </TabPanel>
       <TabPanel value={value} index={1}>
         <div className="prod__detail__main">
           <p>Type: </p>
-          <p>Hijab</p>
+          <p>{details.categoryData && details.categoryData.name}</p>
         </div>
         <div className="prod__detail__main">
           <p>Brand: </p>
-          <p>Haya</p>
-        </div>
-        <div className="prod__detail__main">
-          <p>Size: </p>
-          <p>Free</p>
-        </div>
-        <div className="prod__detail__main">
-          <p>Color: </p>
-          <p>Dark</p>
+          <p>{details.brand}</p>
         </div>
         <div className="prod__detail__main">
           <p>Fabric: </p>
-          <p>Cotton</p>
+          <p>{details.fabric}</p>
         </div>
         <div className="prod__detail__main">
           <p>Sleeve: </p>
-          <p>Full Sleeve</p>
+          <p>{details.sleeve}</p>
         </div>
         <div className="prod__detail__main">
           <p>Pattern: </p>
-          <p>Solid</p>
+          <p>{details.pattern}</p>
         </div>
         <div className="prod__detail__main">
           <p>Suitable For: </p>
-          <p>Womens, Girls, Ladies</p>
+          <p>{details.suitableFor}</p>
         </div>
       </TabPanel>
     </Box>

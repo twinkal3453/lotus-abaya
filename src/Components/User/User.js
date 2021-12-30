@@ -1,16 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./user.css";
 import { Divider } from "antd";
+import { isAuthenticated } from "../Auth/helper/index";
+import { useDispatch } from "react-redux";
+import { cartList } from "../../features/cartSlice";
 
-import user from "../../assets/user.png";
+import users from "../../assets/user.png";
 
 const User = () => {
+  const dispatch = useDispatch();
+  const { user } = isAuthenticated();
+
+  const preload = () => {
+    if (user) {
+      if (typeof window !== undefined) {
+        var cartValue = JSON.parse(localStorage.getItem("cart"));
+        dispatch(cartList(cartValue));
+      }
+    }
+  };
+
+  useEffect(() => {
+    preload();
+  }, []);
+
   return (
     <div className="container">
       <div className="userDetails">
         <div className="user_sec">
           <div className="user_det">
-            <img src={user} alt="" />
+            <img src={users} alt="" />
             <h5>Twinkal Raj</h5>
           </div>
         </div>

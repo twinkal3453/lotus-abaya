@@ -1,45 +1,100 @@
-import React, { useState } from "react";
+import * as React from "react";
+import { useState, useEffect } from "react";
+import Radio from "@mui/material/Radio";
+import axios from "../../axios";
 import ProdCarousel from "./productCarousel/ProdCarousel";
+import { Link } from "react-router-dom";
 import "./productDetails.css";
 import Ratings from "./Ratings/Ratings";
 import RatingUser from "./RatingUser/RatingUser";
 import TabsDetails from "./Tabs/TabsDetails";
+import { addItemToCart } from "./helper/cartHelper";
+import { useDispatch } from "react-redux";
+import { cartList } from "../../features/cartSlice";
+import { isAuthenticated } from "../Auth/helper/index";
 
-import Hijab1 from "../../assets/category/hijab1.jpg";
-import Hijab2 from "../../assets/category/hijab2.jpg";
-import Hijab3 from "../../assets/category/hijab3.jpg";
-import Hijab4 from "../../assets/category/hijab4.jpg";
-import Hijab5 from "../../assets/category/hijab5.jpg";
+const ProductDetails = ({
+  match,
+  addToCart = true,
+  removeFromCart = false,
+}) => {
+  const productId = match.params.productId;
+  const dispatch = useDispatch();
+  const [productDetail, setProductDetail] = useState([]);
+  const [count, setCount] = useState(productDetail.count);
+  const [numbers, setNumbers] = useState("1");
+  const [color, setColor] = useState();
+  const [size, setSize] = useState();
+  const { user } = isAuthenticated();
 
-const imageDatas = [
-  {
-    img: Hijab1,
-  },
-  {
-    img: Hijab2,
-  },
-  {
-    img: Hijab3,
-  },
-  {
-    img: Hijab4,
-  },
-  {
-    img: Hijab5,
-  },
-];
+  const addingToRedux = () => {
+    if (typeof window !== undefined) {
+      var cartValue = JSON.parse(localStorage.getItem("cart"));
+      dispatch(cartList(cartValue));
+    }
+  };
 
-const ProductDetails = () => {
-  const [numbers, setNumbers] = useState();
+  const addsToCart = () => {
+    const mainData = { ...productDetail, numbers, color, size };
+    if (numbers && color && size) {
+      addItemToCart(mainData);
+      addingToRedux();
+    } else {
+      alert("please Select Color, size, quantity");
+    }
+  };
+
+  const showAddToCart = (addToCart) => {
+    return user ? (
+      <button
+        onClick={addsToCart}
+        style={{ color: "white" }}
+        className="buyNow__btn"
+      >
+        Add to cart
+      </button>
+    ) : (
+      <Link to="/login">
+        <div className="goNow__btn">Add to cart</div>
+      </Link>
+    );
+  };
+
+  const showRemoveFromCart = () => {
+    return (
+      <Link to="/cart" style={{ color: "white" }}>
+        <div className="goNow__btn">Go to cart</div>
+      </Link>
+    );
+  };
+
+  useEffect(() => {
+    async function fetchData() {
+      const req = await axios.get(`/product/${productId}`);
+      setProductDetail(req.data);
+    }
+    fetchData();
+  }, []);
+
+  const handleColorChange = (event) => {
+    setColor(event.target.value);
+  };
+
+  const handleSizeChange = (event) => {
+    setSize(event.target.value);
+  };
+
+  const controlProps = (item) => ({
+    checked: color === item,
+    onChange: handleColorChange,
+    value: item,
+    name: "color-radio-button-demo",
+    inputProps: { "aria-label": item },
+  });
 
   const handleChange = (event) => {
     setNumbers(event.target.value);
   };
-  console.log(numbers);
-
-  const discStr = [
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt mollitia quia exercitationem pariatur cupiditate! Rerum quos, consectetur hic reprehenderit sed possimus mollitia! Eius culpa debitis ullam. Mollitia esse aspernatur saepe.",
-  ];
 
   // short the description
   function truncate(string, n) {
@@ -48,94 +103,140 @@ const ProductDetails = () => {
 
   return (
     <div className="container">
-      <div className="main__cont__prodDetails">
-        <div className="prodDetails__grid">
-          <div className="ProdDetails__img">
-            <ProdCarousel images={imageDatas} />
-          </div>
-          <div className="ProdDetails__data">
-            <div className="prod__name__share">
-              <div className="prod__name__detail">
-                <h5>Instant Hijab with Hand</h5>
-                <h6>Haya Fashion</h6>
-              </div>
-              <div className="prod__name__share__se">
-                <div className="share__sec__wish">
-                  <i className="far fa-heart"></i>
-                </div>
-                <div className="share__sec__wish">
-                  <i className="fas fa-location-arrow"></i>
-                </div>
-              </div>
+      {productDetail && (
+        <div className="main__cont__prodDetails">
+          <div className="prodDetails__grid">
+            <div className="ProdDetails__img">
+              <ProdCarousel images={productDetail.photos} />
             </div>
-            <p className="prod__description">{truncate(discStr[0], 100)}</p>
-            <h4 className="product__price">USD 9.99</h4>
-            <div className="product__color">
-              <p>color</p>
-              <div className="color_panel">
-                <i style={{ color: "red" }} className="fas fa-circle"></i>
-              </div>
-            </div>
-            <div className="product__size">
-              <p>size</p>
-              <div className="size__panel">
-                <div className="size__panels">
-                  <p>s</p>
+            <div className="ProdDetails__data">
+              <div className="prod__name__share">
+                <div className="prod__name__detail">
+                  <h5>{productDetail.name}</h5>
+                  <h6 style={{ textTransform: "capitalize" }}>
+                    {productDetail.brand}
+                  </h6>
                 </div>
-                <div className="size__panels">
-                  <p>m</p>
-                </div>
-                <div className="size__panels">
-                  <p>l</p>
-                </div>
-                <div className="size__panels">
-                  <p>xl</p>
-                </div>
-                <div className="size__panels">
-                  <p>xxl</p>
+                <div className="prod__name__share__se">
+                  <div className="share__sec__wish">
+                    <i className="far fa-heart"></i>
+                  </div>
+                  <div className="share__sec__wish">
+                    <i className="fas fa-location-arrow"></i>
+                  </div>
                 </div>
               </div>
-            </div>
-
-            <div className="prod__select__item">
-              <p>select item</p>
-              <div className="cart__buy">
-                <select
-                  defaultValue={{ value: "1" }}
-                  onChange={handleChange}
-                  className="num__select"
-                  name="numbers"
-                  id="numbers"
+              <p className="prod__description">
+                {truncate(productDetail.description, 100)}
+              </p>
+              <h4 className="product__price">
+                <span
+                  style={{
+                    textDecoration: "line-through",
+                    color: "grey",
+                    fontSize: "1.3rem",
+                    marginRight: ".5rem",
+                  }}
+                >{`$${productDetail.price}`}</span>
+                {`$${(
+                  productDetail.price -
+                  productDetail.price * (productDetail.discount / 100)
+                ).toFixed(2)}`}
+                <span
+                  style={{
+                    fontSize: ".8rem",
+                    color: "grey",
+                    marginLeft: ".4rem",
+                  }}
                 >
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                </select>
-                <button style={{ color: "white" }} className="buyNow__btn">
-                  Add to cart
-                </button>
+                  {productDetail.discount}% off
+                </span>
+              </h4>
+              <div className="product__color">
+                <p>color</p>
+                <div
+                  style={{ display: "flex !important" }}
+                  className="color__panels"
+                >
+                  {productDetail.colors &&
+                    productDetail.colors.map((color, index) => {
+                      return (
+                        <div key={index} className="color_panel">
+                          <Radio
+                            {...controlProps(color)}
+                            style={{ color: `${color}` }}
+                            sx={{
+                              "& .MuiSvgIcon-root": {
+                                fontSize: 28,
+                              },
+                            }}
+                          />
+                        </div>
+                      );
+                    })}
+                </div>
+              </div>
+              <div className="product__size">
+                <p>size</p>
+                <div className="size__panel">
+                  <select
+                    onChange={handleSizeChange}
+                    className="num__select"
+                    name="numbers"
+                    id="numbers"
+                    style={{ textTransform: "uppercase" }}
+                  >
+                    {productDetail.sizes &&
+                      productDetail.sizes.map((size, index) => (
+                        <option
+                          style={{ textTransform: "uppercase" }}
+                          key={index}
+                          value={size}
+                        >
+                          {size}
+                        </option>
+                      ))}
+                  </select>
+                </div>
               </div>
 
-              <div className="free__shipping">
-                <i className="fas fa-shipping-fast"></i>
-                <p>Free 5 days shipping !</p>
+              <div className="prod__select__item">
+                <p>select item</p>
+                <div className="cart__buy">
+                  <select
+                    onChange={handleChange}
+                    className="num__select"
+                    name="numbers"
+                    id="numbers"
+                  >
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                  </select>
+                  {addToCart ? showAddToCart(addToCart) : showRemoveFromCart()}
+                </div>
+
+                <div className="free__shipping">
+                  <i className="fas fa-shipping-fast"></i>
+                  <p>Free 5 days shipping !</p>
+                </div>
+                <div className="free__return">
+                  <i className="fas fa-exchange-alt"></i>
+                  <p>Free returns - 10 days to change your mind !</p>
+                </div>
+                <div className="tabs__details">
+                  <TabsDetails details={productDetail} />
+                </div>
+                <Ratings />
+                <RatingUser />
               </div>
-              <div className="free__return">
-                <i className="fas fa-exchange-alt"></i>
-                <p>Free returns - 10 days to change your mind !</p>
-              </div>
-              <div className="tabs__details">
-                <TabsDetails />
-              </div>
-              <Ratings />
-              <RatingUser />
             </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

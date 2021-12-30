@@ -15,8 +15,9 @@ import StepLogin from "./Components/Stepper/StepLogin";
 import Login from "./Components/Auth/Login";
 import SignUp from "./Components/Auth/SignUp";
 import { isAuthenticated } from "./Components/Auth/helper/index";
-import { useDispatch } from "react-redux";
 import { login, logout } from "./features/userSlice";
+import { useDispatch } from "react-redux";
+import { cartList } from "./features/cartSlice";
 import User from "./Components/User/User";
 import PrivateRoute from "./Components/Auth/helper/PrivateRoutes";
 
@@ -33,6 +34,10 @@ function App() {
           name: user.name,
         })
       );
+      if (typeof window !== undefined) {
+        var cartValue = JSON.parse(localStorage.getItem("cart"));
+        dispatch(cartList(cartValue));
+      }
     } else {
       // logout
       dispatch(logout());
@@ -52,7 +57,10 @@ function App() {
             <Route path="/contact" component={Contact} />
             <PrivateRoute path="/cart" component={Cart} />
             <PrivateRoute path="/wishlist" component={WishList} />
-            <Route path="/productDetails" component={ProductDetails} />
+            <Route
+              path="/productDetails/:productId"
+              component={ProductDetails}
+            />
             <Route path="/stepLogin" component={StepLogin} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={SignUp} />

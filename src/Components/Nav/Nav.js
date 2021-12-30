@@ -7,8 +7,9 @@ import lens from "../../assets/lens.svg";
 import { Drawer, Modal, Divider, Badge } from "antd";
 import "./nav.css";
 import { signout, isAuthenticated } from "../Auth/helper/index";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../features/userSlice";
+import { selectCart } from "../../features/cartSlice";
 
 const linkStyle = {
   color: "rgb(62, 62, 73)",
@@ -16,6 +17,7 @@ const linkStyle = {
 };
 
 const Nav = ({ history }) => {
+  const cartLength = useSelector(selectCart);
   const dispatch = useDispatch();
   const [visible, setVisible] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -67,7 +69,10 @@ const Nav = ({ history }) => {
             </div>
             <div>
               <Link to="/cart">
-                <Badge count={1} offset={[5, 2]}>
+                <Badge
+                  count={cartLength ? cartLength.length : ""}
+                  offset={[5, 2]}
+                >
                   <img style={{ width: "1.1rem" }} src={bag} alt="" />
                 </Badge>
               </Link>

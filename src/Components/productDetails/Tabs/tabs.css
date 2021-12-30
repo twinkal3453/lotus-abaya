@@ -8,3 +8,9 @@
 .css-1aquho2-MuiTabs-indicator {
   background-color: rgb(255, 183, 49) !important;
 }
+.prod__detail__main p {
+  text-transform: capitalize;
+}
+.product__description {
+  text-transform: initial;
+}

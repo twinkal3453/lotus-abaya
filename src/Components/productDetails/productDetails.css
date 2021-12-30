@@ -1,8 +1,12 @@
+.css-ahj2mt-MuiTypography-root {
+  font-size: 1.2rem !important;
+  text-transform: uppercase !important;
+  margin: 0 0.5rem;
+}
 .main__cont__prodDetails {
   background: white;
   padding: 1.5rem;
   margin: 1.5rem 0;
-  box-shadow: 0 0 6px 2px rgb(240, 240, 240);
 }
 .prodDetails__grid {
   display: grid;
@@ -68,14 +72,21 @@
   margin-bottom: 0.5rem;
   color: rgb(62, 60, 87);
 }
+.color__panels {
+  display: flex;
+}
 .color_panel {
-  margin-left: 0.5rem;
+  background-color: rgb(240, 240, 240);
+  margin: 0 0.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 2.3rem;
   width: 2.3rem;
   border-radius: 0.7rem;
+  transition: 0.3s;
+}
+.color_panel:hover {
   box-shadow: 2px 2px 3px 1px rgb(224, 224, 224);
 }
 .color_panel i {
@@ -161,6 +172,19 @@
   border: none;
   transition: 0.3s;
 }
+.goNow__btn {
+  background: rgb(255, 194, 82);
+  text-transform: uppercase;
+  color: rgb(255, 255, 255);
+  font-weight: 500;
+  margin: 0 0.5rem;
+  padding: 0.8rem 1.5rem;
+  outline: none;
+  border-radius: 0.8rem;
+  border: none;
+  transition: 0.3s;
+}
+
 .addToCart__btn {
   background: rgb(245, 245, 245);
 }
