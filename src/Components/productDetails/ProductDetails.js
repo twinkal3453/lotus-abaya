@@ -35,8 +35,8 @@ const ProductDetails = ({
   };
 
   const addsToCart = () => {
-    const mainData = { ...productDetail, numbers, color, size };
-    if (numbers && color && size) {
+    const mainData = { ...productDetail, count, color, size };
+    if (count && color && size) {
       addItemToCart(mainData);
       addingToRedux();
     } else {
@@ -74,7 +74,7 @@ const ProductDetails = ({
       setProductDetail(req.data);
     }
     fetchData();
-  }, []);
+  }, [productId]);
 
   const handleColorChange = (event) => {
     setColor(event.target.value);
@@ -93,7 +93,7 @@ const ProductDetails = ({
   });
 
   const handleChange = (event) => {
-    setNumbers(event.target.value);
+    setCount(event.target.value);
   };
 
   // short the description
@@ -182,8 +182,8 @@ const ProductDetails = ({
                   <select
                     onChange={handleSizeChange}
                     className="num__select"
-                    name="numbers"
-                    id="numbers"
+                    name="sizes"
+                    id="sizes"
                     style={{ textTransform: "uppercase" }}
                   >
                     {productDetail.sizes &&
@@ -206,8 +206,8 @@ const ProductDetails = ({
                   <select
                     onChange={handleChange}
                     className="num__select"
-                    name="numbers"
-                    id="numbers"
+                    name="count"
+                    id="count"
                   >
                     <option value="1">1</option>
                     <option value="2">2</option>

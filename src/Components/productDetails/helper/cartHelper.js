@@ -6,7 +6,7 @@ export const addItemToCart = (item) => {
     }
     cart.push({
       ...item,
-      count: 1,
+      count: parseInt(item.count),
     });
     localStorage.setItem("cart", JSON.stringify(cart));
   }
@@ -39,6 +39,8 @@ export const removeItemFromCart = (productId) => {
 export const cartEmpty = (next) => {
   if (typeof window !== undefined) {
     localStorage.removeItem("cart");
+    let cart = [];
+    localStorage.setItem("cart", JSON.stringify(cart));
     next();
   }
 };
