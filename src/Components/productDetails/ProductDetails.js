@@ -9,7 +9,9 @@ import Ratings from "./Ratings/Ratings";
 import RatingUser from "./RatingUser/RatingUser";
 import TabsDetails from "./Tabs/TabsDetails";
 import { addItemToCart } from "./helper/cartHelper";
+import { addItemToWishList } from "../WishList/wishListHelper";
 import { useDispatch } from "react-redux";
+import { wishListList } from "../../features/wishListSlice";
 import { cartList } from "../../features/cartSlice";
 import { isAuthenticated } from "../Auth/helper/index";
 
@@ -31,6 +33,8 @@ const ProductDetails = ({
     if (typeof window !== undefined) {
       var cartValue = JSON.parse(localStorage.getItem("cart"));
       dispatch(cartList(cartValue));
+      var wishListValue = JSON.parse(localStorage.getItem("wishList"));
+      dispatch(wishListList(wishListValue));
     }
   };
 
@@ -96,6 +100,11 @@ const ProductDetails = ({
     setCount(event.target.value);
   };
 
+  const addsTowishList = () => {
+    addItemToWishList(productDetail);
+    addingToRedux();
+  };
+
   // short the description
   function truncate(string, n) {
     return string?.length > n ? string.substr(0, n - 1) + "..." : string;
@@ -112,13 +121,13 @@ const ProductDetails = ({
             <div className="ProdDetails__data">
               <div className="prod__name__share">
                 <div className="prod__name__detail">
-                  <h5>{productDetail.name}</h5>
+                  <h5>{productDetail.name ? productDetail.name : ""}</h5>
                   <h6 style={{ textTransform: "capitalize" }}>
-                    {productDetail.brand}
+                    {productDetail.brand ? productDetail.brand : ""}
                   </h6>
                 </div>
                 <div className="prod__name__share__se">
-                  <div className="share__sec__wish">
+                  <div onClick={addsTowishList} className="share__sec__wish">
                     <i className="far fa-heart"></i>
                   </div>
                   <div className="share__sec__wish">
@@ -129,6 +138,7 @@ const ProductDetails = ({
               <p className="prod__description">
                 {truncate(productDetail.description, 100)}
               </p>
+
               <h4 className="product__price">
                 <span
                   style={{
@@ -137,11 +147,15 @@ const ProductDetails = ({
                     fontSize: "1.3rem",
                     marginRight: ".5rem",
                   }}
-                >{`$${productDetail.price}`}</span>
-                {`$${(
-                  productDetail.price -
-                  productDetail.price * (productDetail.discount / 100)
-                ).toFixed(2)}`}
+                >
+                  {productDetail.price &&
+                    `$${productDetail.price ? productDetail.price : ""}`}
+                </span>
+                {productDetail.price &&
+                  `$${(
+                    productDetail.price -
+                    productDetail.price * (productDetail.discount / 100)
+                  ).toFixed(2)}`}
                 <span
                   style={{
                     fontSize: ".8rem",
@@ -149,9 +163,10 @@ const ProductDetails = ({
                     marginLeft: ".4rem",
                   }}
                 >
-                  {productDetail.discount}% off
+                  {productDetail.discount && `${productDetail.discount}% off`}
                 </span>
               </h4>
+
               <div className="product__color">
                 <p>color</p>
                 <div

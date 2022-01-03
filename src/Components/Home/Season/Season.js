@@ -14,7 +14,10 @@ const Season = () => {
               Ladies, bring out the inner fashionista in you with our beautiful
               winter collection.
             </p>
-            <Link style={{ color: "rgb(56, 56, 56)" }} to="/product">
+            <Link
+              style={{ color: "rgb(56, 56, 56)" }}
+              to="/product?collection=61cacf21c0842f3bea78fca5"
+            >
               <button>Shop Now</button>
             </Link>
           </div>

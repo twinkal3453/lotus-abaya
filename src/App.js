@@ -18,6 +18,7 @@ import { isAuthenticated } from "./Components/Auth/helper/index";
 import { login, logout } from "./features/userSlice";
 import { useDispatch } from "react-redux";
 import { cartList } from "./features/cartSlice";
+import { wishListList } from "./features/wishListSlice";
 import User from "./Components/User/User";
 import PrivateRoute from "./Components/Auth/helper/PrivateRoutes";
 
@@ -37,6 +38,8 @@ function App() {
       if (typeof window !== undefined) {
         var cartValue = JSON.parse(localStorage.getItem("cart"));
         dispatch(cartList(cartValue));
+        var wishListValue = JSON.parse(localStorage.getItem("wishList"));
+        dispatch(wishListList(wishListValue));
       }
     } else {
       // logout

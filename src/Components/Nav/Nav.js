@@ -10,6 +10,7 @@ import { signout, isAuthenticated } from "../Auth/helper/index";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../features/userSlice";
 import { selectCart } from "../../features/cartSlice";
+import { selectWishList } from "../../features/wishListSlice";
 
 const linkStyle = {
   color: "rgb(62, 62, 73)",
@@ -18,6 +19,7 @@ const linkStyle = {
 
 const Nav = ({ history }) => {
   const cartLength = useSelector(selectCart);
+  const wishListLength = useSelector(selectWishList);
   const dispatch = useDispatch();
   const [visible, setVisible] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -62,7 +64,11 @@ const Nav = ({ history }) => {
             </div>
             <div>
               <Link to="/wishlist">
-                <Badge className="wishlist" count={1} offset={[5, 2]}>
+                <Badge
+                  className="wishlist"
+                  count={wishListLength ? wishListLength.length : ""}
+                  offset={[5, 2]}
+                >
                   <i style={linkStyle} className="far fa-heart"></i>
                 </Badge>
               </Link>

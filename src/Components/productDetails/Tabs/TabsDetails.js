@@ -87,6 +87,10 @@ const TabsDetails = ({ details }) => {
           <p>Suitable For: </p>
           <p>{details.suitableFor}</p>
         </div>
+        <div className="prod__detail__main">
+          <p>Used For: </p>
+          <p>{details.collectionData ? details.collectionData.name : ""}</p>
+        </div>
       </TabPanel>
     </Box>
   );

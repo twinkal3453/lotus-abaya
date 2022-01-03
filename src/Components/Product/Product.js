@@ -1,185 +1,59 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { PATH } from "../../backend";
+import axios from "../../axios";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { addItemToWishList } from "../WishList/wishListHelper";
+import { useDispatch } from "react-redux";
+import { wishListList } from "../../features/wishListSlice";
+
 import { Link } from "react-router-dom";
 import "./product.css";
 
-// importing the photos
-import hijab1 from "../../assets/category/hijab1.jpg";
-import hijab2 from "../../assets/category/hijab2.jpg";
-import hijab3 from "../../assets/category/hijab3.jpg";
-import hijab4 from "../../assets/category/hijab4.jpg";
-import hijab5 from "../../assets/category/hijab5.jpg";
-import hijab6 from "../../assets/category/hijab6.jpg";
-import hijab7 from "../../assets/category/hijab7.jpg";
-import hijab8 from "../../assets/category/hijab8.jpg";
-import hijab9 from "../../assets/category/hijab9.jpg";
-import hijab10 from "../../assets/category/hijab10.jpg";
-import hijab11 from "../../assets/category/hijab11.jpg";
-import hijab12 from "../../assets/category/hijab12.jpg";
-import hijab13 from "../../assets/category/hijab13.jpg";
-import hijab14 from "../../assets/category/hijab14.jpg";
-import hijab15 from "../../assets/category/hijab15.jpg";
-import hijab16 from "../../assets/category/hijab16.jpg";
-import hijab17 from "../../assets/category/hijab17.jpg";
-import hijab18 from "../../assets/category/hijab18.jpg";
 import "antd/dist/antd.css";
 import { Slider, Checkbox } from "antd";
 
-// Product Data
-const productData = [
-  {
-    img: hijab1,
-    name: "Hijab",
-    price: 9.9,
-    discount: 15,
-  },
-  {
-    img: hijab2,
-    name: "Hijab",
-    price: 7.9,
-    discount: 25,
-  },
-  {
-    img: hijab3,
-    name: "Hijab",
-    price: 11.95,
-    discount: 28,
-  },
-  {
-    img: hijab4,
-    name: "Hijab",
-    price: 10.9,
-    discount: 19,
-  },
-  {
-    img: hijab5,
-    name: "Hijab",
-    price: 12.9,
-    discount: 35,
-  },
-  {
-    img: hijab6,
-    name: "Hijab",
-    price: 13.9,
-    discount: 45,
-  },
-  {
-    img: hijab7,
-    name: "Hijab",
-    price: 8.99,
-    discount: 25,
-  },
-  {
-    img: hijab8,
-    name: "Hijab",
-    price: 5.99,
-    discount: 10,
-  },
-  {
-    img: hijab9,
-    name: "Hijab",
-    price: 14.99,
-    discount: 15,
-  },
-  {
-    img: hijab10,
-    name: "Hijab",
-    price: 9.9,
-    discount: 33,
-  },
-  {
-    img: hijab11,
-    name: "Hijab",
-    price: 13.89,
-    discount: 25,
-  },
-  {
-    img: hijab12,
-    name: "Hijab",
-    price: 15.99,
-    discount: 15,
-  },
-  {
-    img: hijab13,
-    name: "Hijab",
-    price: 12.9,
-    discount: 35,
-  },
-  {
-    img: hijab14,
-    name: "Hijab",
-    price: 7.59,
-    discount: 45,
-  },
-  {
-    img: hijab15,
-    name: "Hijab",
-    price: 9.9,
-    discount: 25,
-  },
-  {
-    img: hijab11,
-    name: "Hijab",
-    price: 13.89,
-    discount: 25,
-  },
-  {
-    img: hijab1,
-    name: "Hijab",
-    price: 9.9,
-    discount: 15,
-  },
-  {
-    img: hijab9,
-    name: "Hijab",
-    price: 14.99,
-    discount: 15,
-  },
-  {
-    img: hijab7,
-    name: "Hijab",
-    price: 8.99,
-    discount: 25,
-  },
-  {
-    img: hijab4,
-    name: "Hijab",
-    price: 10.9,
-    discount: 19,
-  },
-  {
-    img: hijab14,
-    name: "Hijab",
-    price: 7.59,
-    discount: 45,
-  },
-  {
-    img: hijab16,
-    name: "Hijab",
-    price: 15.59,
-    discount: 60,
-  },
-  {
-    img: hijab17,
-    name: "Hijab",
-    price: 12.59,
-    discount: 50,
-  },
-  {
-    img: hijab18,
-    name: "Hijab",
-    price: 17.59,
-    discount: 35,
-  },
-];
-
 const Product = () => {
+  const search = useLocation().search;
+  // const categoryId = new URLSearchParams(search).get("category");
+  const [products, setProducts] = useState([]);
+  const dispatch = useDispatch();
   const [priceValue, setPriceValue] = useState([20, 50]);
   const [expanded, setExpanded] = React.useState("panel1");
+
+  console.log(products);
+
+  const preload = () => {
+    async function fetchData() {
+      const req = await axios.get(`/products${search}`);
+      setProducts(req.data);
+    }
+    fetchData();
+  };
+
+  useEffect(() => {
+    preload();
+  }, []);
+
+  const addingToRedux = () => {
+    if (typeof window !== undefined) {
+      var wishListValue = JSON.parse(localStorage.getItem("wishList"));
+      dispatch(wishListList(wishListValue));
+    }
+  };
+
+  const addsToWishList = (productId) => {
+    products.map((item) => {
+      if (item._id === productId) {
+        addItemToWishList(item);
+        addingToRedux();
+      }
+    });
+  };
 
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
@@ -393,7 +267,7 @@ const Product = () => {
         </div>
         <div className="prof__list__card">
           <div className="first__heading">
-            <h5>{`Hijab (${productData.length})`}</h5>
+            <h5>{`Hijab (${products.length})`}</h5>
             <select
               defaultValue="New Arrival"
               className="filter__dropdown"
@@ -408,36 +282,41 @@ const Product = () => {
 
           {/* Product card Section */}
           <div className="prod__card__section">
-            {productData.map((item, index) => {
+            {products.map((item, index) => {
               return (
                 <>
                   <div className="prod__section__card" key={index}>
-                    <Link to="/productDetails">
-                      <img src={item.img} alt="" />
-                    </Link>
-                    <div className="spec__prod__discount">
-                      <p>{`${item.discount}% Off`}</p>
-                    </div>
                     <div className="spec__wish">
-                      <div className="spec__prod__wishlist">
+                      <div
+                        onClick={() => addsToWishList(item._id)}
+                        className="spec__prod__wishlist"
+                      >
                         <i className="far fa-heart"></i>
                       </div>
                     </div>
-                    <div className="spec__prod__price">
-                      <div className="prod__name__price">
-                        <h6>{item.name}</h6>
-                        <p>
-                          <span className="actual__price">{`$${item.price}`}</span>
-                          {`$${(
-                            item.price -
-                            item.price * (item.discount / 100)
-                          ).toFixed(2)}`}
-                        </p>
+                    <Link to={`/productDetails/${item._id}`}>
+                      <img src={`${PATH}/${item.photos[0]}`} alt="" />
+
+                      <div className="spec__prod__discount">
+                        <p>{`${item.discount}% Off`}</p>
                       </div>
-                      <div className="prod__cart__icon">
+
+                      <div className="spec__prod__price">
+                        <div className="prod__name__price">
+                          <h6>{item.name}</h6>
+                          <p>
+                            <span className="actual__price">{`$${item.price}`}</span>
+                            {`$${(
+                              item.price -
+                              item.price * (item.discount / 100)
+                            ).toFixed(2)}`}
+                          </p>
+                        </div>
+                        {/* <div className="prod__cart__icon">
                         <i className="fas fa-shopping-basket"></i>
+                      </div> */}
                       </div>
-                    </div>
+                    </Link>
                   </div>
                 </>
               );

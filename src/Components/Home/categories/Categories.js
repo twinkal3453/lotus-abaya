@@ -26,7 +26,11 @@ const Categories = () => {
       <div className="cate_fiels">
         {categoryDate.map((item, index) => {
           return (
-            <Link to="/product" className="div__cate" key={index}>
+            <Link
+              to={`/product?category=${item._id}`}
+              className="div__cate"
+              key={index}
+            >
               <img src={`${PATH}/${item.photo}`} alt="" />
               <div className="cate_text">
                 <p>{item.name}</p>
