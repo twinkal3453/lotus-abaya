@@ -27,9 +27,14 @@ const Ratings = () => {
 
   const handleClose = () => {
     setOpen(false);
-    message.loading({ content: "Loading...", key });
+    message.loading({ content: "Loading...", key, className: "rate_icon" });
     setTimeout(() => {
-      message.success({ content: "Thank You!", key, duration: 2 });
+      message.success({
+        content: "Thank You!",
+        key,
+        duration: 2,
+        className: "rate_icon",
+      });
     }, 1000);
   };
 

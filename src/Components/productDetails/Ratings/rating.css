@@ -9,6 +9,10 @@
   grid-template-columns: 1fr 3fr 2fr;
   grid-gap: 1rem;
 }
+.rate_icon .anticon svg {
+  color: rgb(34, 233, 7);
+}
+
 .rat_ing {
   margin-bottom: 0;
   font-size: 1.4rem;

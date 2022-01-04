@@ -14,6 +14,8 @@ import { useDispatch } from "react-redux";
 import { wishListList } from "../../features/wishListSlice";
 import { cartList } from "../../features/cartSlice";
 import { isAuthenticated } from "../Auth/helper/index";
+import "antd/dist/antd.css";
+import { message } from "antd";
 
 const ProductDetails = ({
   match,
@@ -24,7 +26,6 @@ const ProductDetails = ({
   const dispatch = useDispatch();
   const [productDetail, setProductDetail] = useState([]);
   const [count, setCount] = useState(productDetail.count);
-  const [numbers, setNumbers] = useState("1");
   const [color, setColor] = useState();
   const [size, setSize] = useState();
   const { user } = isAuthenticated();
@@ -44,7 +45,10 @@ const ProductDetails = ({
       addItemToCart(mainData);
       addingToRedux();
     } else {
-      alert("please Select Color, size, quantity");
+      message.error({
+        content: "please select color, size and item",
+        className: "message_icon",
+      });
     }
   };
 
@@ -112,6 +116,7 @@ const ProductDetails = ({
 
   return (
     <div className="container">
+      {/* {showingAlert()} */}
       {productDetail && (
         <div className="main__cont__prodDetails">
           <div className="prodDetails__grid">

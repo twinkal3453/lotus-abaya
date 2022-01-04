@@ -3,6 +3,12 @@
   text-transform: uppercase !important;
   margin: 0 0.5rem;
 }
+.message_icon .anticon svg {
+  color: rgb(250, 44, 44);
+}
+.message_icon {
+  color: rgb(71, 71, 71);
+}
 .main__cont__prodDetails {
   background: white;
   padding: 1.5rem;

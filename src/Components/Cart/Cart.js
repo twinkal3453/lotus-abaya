@@ -147,7 +147,9 @@ const Cart = () => {
             products.map((item, index) => {
               return (
                 <div className="cart__data" key={index}>
-                  <img src={`${PATH}/${item.photos[0]}`} alt="" />
+                  <Link to={`/productDetails/${item._id}`}>
+                    <img src={`${PATH}/${item.photos[0]}`} alt="" />
+                  </Link>
                   <div className="cart__prod">
                     <h6>{item.name}</h6>
                     <p>{`Size: ${item.size}`}</p>
