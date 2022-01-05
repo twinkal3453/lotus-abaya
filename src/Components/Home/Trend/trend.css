@@ -19,11 +19,6 @@
   background: white;
   padding: 2rem;
 }
-.cond_latest i {
-  color: rgb(70, 72, 88);
-  font-size: 3rem;
-  margin: 0.5rem 0;
-}
 .cond_latest h5 {
   font-size: 1.8rem;
   color: rgb(70, 72, 88);

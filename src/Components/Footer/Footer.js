@@ -6,6 +6,8 @@ import google from "../../assets/googlePay1.png";
 import masterCard from "../../assets/masterCard.jpg";
 import visa from "../../assets/visa1.jpg";
 import mainLogo from "../../assets/Lotus.png";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
 import "./footer.css";
 
 const payment = [
@@ -39,10 +41,10 @@ const Footer = () => {
             </div>
             <div className="icon_social">
               <div className="icons">
-                <i className="fab fa-facebook"></i>
+                <FacebookRoundedIcon />
               </div>
               <div className="icons">
-                <i className="fab fa-instagram"></i>
+                <InstagramIcon />
               </div>
             </div>
           </div>

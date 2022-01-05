@@ -44,14 +44,14 @@
   transform: scale(1.01);
   box-shadow: 0 0 10px 1px rgba(128, 128, 128, 0.199);
 }
-.card__trash i {
+.card__trash {
   font-size: 1.1rem;
   margin: 0.5rem 1rem;
   color: rgb(196, 196, 196);
   cursor: pointer;
   transition: 0.3s;
 }
-.card__trash i:hover {
+.card__trash:hover {
   color: rgb(255, 117, 117);
 }
 .card__main {

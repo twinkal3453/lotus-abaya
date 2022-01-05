@@ -16,6 +16,21 @@ import { cartList } from "../../features/cartSlice";
 import { isAuthenticated } from "../Auth/helper/index";
 import "antd/dist/antd.css";
 import { message } from "antd";
+import { styled } from "@mui/material/styles";
+import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
+import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
+import SendRoundedIcon from "@mui/icons-material/SendRounded";
+
+const LightTooltip = styled(({ className, ...props }) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: theme.palette.common.white,
+    color: "rgba(0, 0, 0, 0.87)",
+    boxShadow: theme.shadows[5],
+    fontSize: 13,
+  },
+}));
 
 const ProductDetails = ({
   match,
@@ -132,12 +147,18 @@ const ProductDetails = ({
                   </h6>
                 </div>
                 <div className="prod__name__share__se">
-                  <div onClick={addsTowishList} className="share__sec__wish">
-                    <i className="far fa-heart"></i>
-                  </div>
-                  <div className="share__sec__wish">
-                    <i className="fas fa-location-arrow"></i>
-                  </div>
+                  <LightTooltip title="Add to wishlist" arrow placement="top">
+                    <div onClick={addsTowishList} className="share__sec__wish">
+                      <FavoriteBorderRoundedIcon />
+                    </div>
+                  </LightTooltip>
+                  <LightTooltip title="Share" arrow placement="top">
+                    <div className="share__sec__wish">
+                      <SendRoundedIcon
+                        style={{ transform: "rotate(300deg)" }}
+                      />
+                    </div>
+                  </LightTooltip>
                 </div>
               </div>
               <p className="prod__description">
@@ -182,15 +203,17 @@ const ProductDetails = ({
                     productDetail.colors.map((color, index) => {
                       return (
                         <div key={index} className="color_panel">
-                          <Radio
-                            {...controlProps(color)}
-                            style={{ color: `${color}` }}
-                            sx={{
-                              "& .MuiSvgIcon-root": {
-                                fontSize: 28,
-                              },
-                            }}
-                          />
+                          <LightTooltip title={color} arrow placement="top">
+                            <Radio
+                              {...controlProps(color)}
+                              style={{ color: `${color}` }}
+                              sx={{
+                                "& .MuiSvgIcon-root": {
+                                  fontSize: 28,
+                                },
+                              }}
+                            />
+                          </LightTooltip>
                         </div>
                       );
                     })}

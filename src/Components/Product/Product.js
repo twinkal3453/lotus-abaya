@@ -8,8 +8,10 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { addItemToWishList } from "../WishList/wishListHelper";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { wishListList } from "../../features/wishListSlice";
+import { selectCategory } from "../../features/categorySlice";
+import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
 
 import { Link } from "react-router-dom";
 import "./product.css";
@@ -18,14 +20,22 @@ import "antd/dist/antd.css";
 import { Slider, Checkbox } from "antd";
 
 const Product = () => {
+  const categoryData = useSelector(selectCategory);
   const search = useLocation().search;
-  // const categoryId = new URLSearchParams(search).get("category");
+  const categoryId = new URLSearchParams(search).get("category");
   const [products, setProducts] = useState([]);
   const dispatch = useDispatch();
   const [priceValue, setPriceValue] = useState([20, 50]);
   const [expanded, setExpanded] = React.useState("panel1");
+  const [categoryName, setCategoryName] = useState("");
 
-  console.log(products);
+  const categoryNames = () => {
+    categoryData.map((item) => {
+      if (item._id === categoryId) {
+        setCategoryName(item.name);
+      }
+    });
+  };
 
   const preload = () => {
     async function fetchData() {
@@ -37,6 +47,7 @@ const Product = () => {
 
   useEffect(() => {
     preload();
+    categoryNames();
   }, []);
 
   const addingToRedux = () => {
@@ -267,7 +278,9 @@ const Product = () => {
         </div>
         <div className="prof__list__card">
           <div className="first__heading">
-            <h5>{`Hijab (${products.length})`}</h5>
+            <h5>{`${categoryName ? categoryName : "Products"} (${
+              products.length
+            })`}</h5>
             <select
               defaultValue="New Arrival"
               className="filter__dropdown"
@@ -291,7 +304,7 @@ const Product = () => {
                         onClick={() => addsToWishList(item._id)}
                         className="spec__prod__wishlist"
                       >
-                        <i className="far fa-heart"></i>
+                        <FavoriteBorderRoundedIcon />
                       </div>
                     </div>
                     <Link to={`/productDetails/${item._id}`}>

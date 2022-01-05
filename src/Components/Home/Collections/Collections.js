@@ -11,12 +11,15 @@ const Collections = () => {
         <div className="top__trend">
           <div className="top__trending__docs">
             <h6>Top Trending</h6>
-            <h2>The pink beauty</h2>
+            <h2>The Classic beauty</h2>
             <p>
               Look sophisticated in our new collection of best colorfull
               clothing ensemble.
             </p>
-            <Link style={{ color: "rgb(56, 56, 56)" }} to="/product">
+            <Link
+              style={{ color: "rgb(56, 56, 56)" }}
+              to="/product?collection=61cacf2ec0842f3bea78fca9"
+            >
               <button>Browse Collection</button>
             </Link>
           </div>

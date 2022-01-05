@@ -5,6 +5,7 @@ import { wishListList, selectWishList } from "../../features/wishListSlice";
 import { isAuthenticated } from "../Auth/helper/index";
 import { PATH } from "../../backend";
 import wishList from "../../assets/wishlist.png";
+import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded";
 import { Link } from "react-router-dom";
 import "./wishList.css";
 
@@ -84,7 +85,9 @@ const WishList = () => {
                       onClick={() => deleteWishList(item._id)}
                       className="card__trash"
                     >
-                      <i className="fas fa-trash"></i>
+                      <DeleteOutlineRoundedIcon
+                        style={{ fontSize: "1.8rem" }}
+                      />
                     </div>
                   </div>
                 </>

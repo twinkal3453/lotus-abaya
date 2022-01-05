@@ -22,9 +22,7 @@
   display: flex;
   justify-content: center;
 }
-.icon_social i {
-  font-size: 1.6rem;
-}
+
 .icons {
   height: 2.5rem;
   width: 2.5rem;

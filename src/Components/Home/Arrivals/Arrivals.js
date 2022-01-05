@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { productList, selectProduct } from "../../../features/productSlice";
 import { wishListList } from "../../../features/wishListSlice";
 import { addItemToWishList } from "../../WishList/wishListHelper";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import "./arrivals.css";
 
 const Arrivals = () => {
@@ -30,7 +31,7 @@ const Arrivals = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const req = await axios.get("/products");
+      const req = await axios.get("/products?limit=12");
       dispatch(productList(req.data));
     }
     fetchData();
@@ -50,7 +51,7 @@ const Arrivals = () => {
                     onClick={() => addsToWishList(item._id)}
                     className="whish__list"
                   >
-                    <i className="far fa-heart"></i>
+                    <FavoriteBorderOutlinedIcon />
                   </button>
                 </div>
                 <Link to={`/productDetails/${item._id}`}>

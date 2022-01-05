@@ -11,6 +11,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../features/userSlice";
 import { selectCart } from "../../features/cartSlice";
 import { selectWishList } from "../../features/wishListSlice";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 
 const linkStyle = {
   color: "rgb(62, 62, 73)",
@@ -52,7 +55,10 @@ const Nav = ({ history }) => {
         <div className=" container main__header">
           <div className="nav__bar">
             <button className="slider__buttton">
-              <i onClick={showDrawer} className="fas fa-bars"></i>
+              <MenuOutlinedIcon
+                onClick={showDrawer}
+                style={{ color: "rgb(62, 62, 73)" }}
+              />
             </button>
             <Link to="/">
               <img style={{ width: "3rem" }} src={mainLogo} alt="" />
@@ -69,7 +75,7 @@ const Nav = ({ history }) => {
                   count={wishListLength ? wishListLength.length : ""}
                   offset={[5, 2]}
                 >
-                  <i style={linkStyle} className="far fa-heart"></i>
+                  <FavoriteBorderIcon style={{ color: "rgb(62, 62, 73)" }} />
                 </Badge>
               </Link>
             </div>
@@ -85,7 +91,9 @@ const Nav = ({ history }) => {
             </div>
             <div>
               <Link to="/user">
-                <i style={linkStyle} className="far fa-user"></i>
+                <AccountCircleOutlinedIcon
+                  style={{ color: "rgb(62, 62, 73)" }}
+                />
               </Link>
             </div>
           </div>
