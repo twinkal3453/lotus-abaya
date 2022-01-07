@@ -100,7 +100,9 @@ const ProductDetails = ({
 
     let items = [];
     for (let i = 0; i < 5; i++) {
-      items.push(req.data[i]);
+      if (req.data[i] !== undefined) {
+        items.push(req.data[i]);
+      }
     }
     setRateData(items);
   }

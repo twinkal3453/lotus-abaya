@@ -103,6 +103,10 @@ const Ratings = ({ data }) => {
     }, 1000);
   };
 
+  const modelClose = () => {
+    setOpen(false);
+  };
+
   const starPercent = () => {
     return (
       (5 * fiveStar +
@@ -121,7 +125,7 @@ const Ratings = ({ data }) => {
       <div className="rating__main__data">
         <div className="rating__people">
           <p className="rat_ing">
-            {starPercent().toFixed(1)}
+            {starPercent() ? starPercent().toFixed(1) : "0"}
             <StarRateRoundedIcon
               style={{ fontSize: "2.4rem", color: "orange" }}
             />
@@ -193,7 +197,7 @@ const Ratings = ({ data }) => {
           open={open}
           TransitionComponent={Transition}
           keepMounted
-          onClose={handleClose}
+          onClose={modelClose}
           aria-describedby="alert-dialog-slide-description"
         >
           <p className="review__text">Your Review Matters</p>

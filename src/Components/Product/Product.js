@@ -11,7 +11,10 @@ import { addItemToWishList } from "../WishList/wishListHelper";
 import { useDispatch, useSelector } from "react-redux";
 import { wishListList } from "../../features/wishListSlice";
 import { selectCategory } from "../../features/categorySlice";
+import Fab from "@mui/material/Fab";
 import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
+import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
+import ArrowBackIosNewRoundedIcon from "@mui/icons-material/ArrowBackIosNewRounded";
 
 import { Link } from "react-router-dom";
 import "./product.css";
@@ -28,6 +31,8 @@ const Product = () => {
   const [priceValue, setPriceValue] = useState([20, 50]);
   const [expanded, setExpanded] = React.useState("panel1");
   const [categoryName, setCategoryName] = useState("");
+  const [pages, setPages] = useState(1);
+  const [disable, setDisable] = useState(false);
 
   const categoryNames = () => {
     categoryData.map((item) => {
@@ -36,6 +41,19 @@ const Product = () => {
       }
     });
   };
+
+  const increaseCount = (count) => {
+    if (pages >= 1) {
+      setDisable(false);
+    }
+    setPages(pages + count);
+  };
+  const decreaseCount = (count) => {
+    pages <= 2 ? setDisable(true) : setDisable(false);
+    setPages(pages - count);
+  };
+
+  console.log(pages);
 
   const preload = () => {
     async function fetchData() {
@@ -334,6 +352,25 @@ const Product = () => {
                 </>
               );
             })}
+          </div>
+          <div className="pagination__parent">
+            <div className="pagination__sec">
+              <Fab
+                disabled={disable}
+                onClick={() => decreaseCount(1)}
+                style={{ height: "3rem", width: "3rem" }}
+                aria-label="add"
+              >
+                <ArrowBackIosNewRoundedIcon />
+              </Fab>
+              <Fab
+                onClick={() => increaseCount(1)}
+                style={{ height: "3rem", width: "3rem" }}
+                aria-label="add"
+              >
+                <ArrowForwardIosRoundedIcon />
+              </Fab>
+            </div>
           </div>
         </div>
       </div>

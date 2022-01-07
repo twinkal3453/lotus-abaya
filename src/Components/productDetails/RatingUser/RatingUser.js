@@ -29,9 +29,9 @@ function stringToColor(string) {
 function stringAvatar(name) {
   return {
     sx: {
-      bgcolor: stringToColor(name),
+      bgcolor: stringToColor(name && name),
     },
-    children: `${name.split(" ")[0][0]}`,
+    children: `${name && name.split(" ")[0][0]}`,
   };
 }
 
@@ -42,33 +42,37 @@ const RatingUser = ({ data }) => {
 
   return (
     <>
-      {data.map((item, index) => {
-        return (
-          <div className="rating__review" key={index}>
-            <div className="rate__user">
-              <Stack direction="row" spacing={2}>
-                <Avatar {...stringAvatar(item && item ? item.name : "a")} />
-              </Stack>
-              <div className="rate__name">
-                <p>{item.name}</p>
-                <div className="rating__area">
-                  <Rating
-                    name="size-small"
-                    value={parsesData(item.star)}
-                    readOnly
-                    emptyIcon={
-                      <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
-                    }
-                  />
+      {data &&
+        data.map((item, index) => {
+          return (
+            <div className="rating__review" key={index}>
+              <div className="rate__user">
+                <Stack direction="row" spacing={2}>
+                  <Avatar {...stringAvatar(item && item ? item.name : "a")} />
+                </Stack>
+                <div className="rate__name">
+                  <p>{item ? item.name : ""}</p>
+                  <div className="rating__area">
+                    <Rating
+                      name="size-small"
+                      value={parsesData(item ? item.star : "")}
+                      readOnly
+                      emptyIcon={
+                        <StarIcon
+                          style={{ opacity: 0.55 }}
+                          fontSize="inherit"
+                        />
+                      }
+                    />
+                  </div>
                 </div>
               </div>
+              <div className="desc">
+                <p>{item ? item.description : ""}</p>
+              </div>
             </div>
-            <div className="desc">
-              <p>{item.description}</p>
-            </div>
-          </div>
-        );
-      })}
+          );
+        })}
     </>
   );
 };
