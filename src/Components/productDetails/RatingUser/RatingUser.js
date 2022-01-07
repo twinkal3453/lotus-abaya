@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState, useEffect } from "react";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import Rating from "@mui/material/Rating";
@@ -34,40 +35,26 @@ function stringAvatar(name) {
   };
 }
 
-const userRatingData = [
-  {
-    name: "Haima Khatun",
-    disc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis dicta aspernatur ipsum delectus debitis sunt,",
-    rate: 2.5,
-  },
-  {
-    name: "Halima Sultan",
-    disc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis dicta aspernatur ipsum delectus debitis sunt,",
-    rate: 4.5,
-  },
-  {
-    name: "Saljan Khatun",
-    disc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis dicta aspernatur ipsum delectus debitis sunt,",
-    rate: 4,
-  },
-];
+const RatingUser = ({ data }) => {
+  const parsesData = (data) => {
+    return parseInt(data);
+  };
 
-const RatingUser = () => {
   return (
     <>
-      {userRatingData.map((item, index) => {
+      {data.map((item, index) => {
         return (
           <div className="rating__review" key={index}>
             <div className="rate__user">
               <Stack direction="row" spacing={2}>
-                <Avatar {...stringAvatar(item.name)} />
+                <Avatar {...stringAvatar(item && item ? item.name : "a")} />
               </Stack>
               <div className="rate__name">
                 <p>{item.name}</p>
                 <div className="rating__area">
                   <Rating
                     name="size-small"
-                    value={item.rate}
+                    value={parsesData(item.star)}
                     readOnly
                     emptyIcon={
                       <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
@@ -77,7 +64,7 @@ const RatingUser = () => {
               </div>
             </div>
             <div className="desc">
-              <p>{item.disc}</p>
+              <p>{item.description}</p>
             </div>
           </div>
         );

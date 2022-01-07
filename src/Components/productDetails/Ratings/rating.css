@@ -63,7 +63,20 @@
   margin-bottom: 0;
 }
 .textarea__input {
-  margin-top: 2rem;
+  border: 1px solid rgb(196, 196, 196);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  outline: none;
+}
+
+.text__fields {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 1rem;
+}
+
+.text__fields input {
   border: 1px solid rgb(196, 196, 196);
   border-radius: 0.5rem;
   padding: 0.5rem;

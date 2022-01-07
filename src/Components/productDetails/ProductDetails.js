@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Radio from "@mui/material/Radio";
 import axios from "../../axios";
 import ProdCarousel from "./productCarousel/ProdCarousel";
+import { getAllRates } from "./helper/ratingApiCall";
 import { Link } from "react-router-dom";
 import "./productDetails.css";
 import Ratings from "./Ratings/Ratings";
@@ -43,7 +44,9 @@ const ProductDetails = ({
   const [count, setCount] = useState(productDetail.count);
   const [color, setColor] = useState();
   const [size, setSize] = useState();
+  const [allRating, setAllRating] = useState([]);
   const { user } = isAuthenticated();
+  const [rateData, setRateData] = useState([]);
 
   const addingToRedux = () => {
     if (typeof window !== undefined) {
@@ -91,12 +94,24 @@ const ProductDetails = ({
     );
   };
 
+  async function preload() {
+    const req = await axios.get(`/ratings?product=${productId}`);
+    setAllRating(req.data);
+
+    let items = [];
+    for (let i = 0; i < 5; i++) {
+      items.push(req.data[i]);
+    }
+    setRateData(items);
+  }
+
   useEffect(() => {
     async function fetchData() {
       const req = await axios.get(`/product/${productId}`);
       setProductDetail(req.data);
     }
     fetchData();
+    preload();
   }, [productId]);
 
   const handleColorChange = (event) => {
@@ -273,8 +288,8 @@ const ProductDetails = ({
                 <div className="tabs__details">
                   <TabsDetails details={productDetail} />
                 </div>
-                <Ratings />
-                <RatingUser />
+                <Ratings data={allRating} />
+                <RatingUser data={rateData} />
               </div>
             </div>
           </div>

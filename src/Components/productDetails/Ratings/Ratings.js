@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -9,7 +10,9 @@ import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import "./rating.css";
 import "antd/dist/antd.css";
+import { createRating } from "../helper/ratingApiCall";
 import { Progress, Divider, message } from "antd";
+import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 
 const key = "updatable";
 
@@ -17,9 +20,71 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const Ratings = () => {
-  const [RateIt, setRateIt] = useState(2);
+const Ratings = ({ data }) => {
+  const params = useParams();
+
+  let fiveStar = 0;
+  let fourStar = 0;
+  let threeStar = 0;
+  let twoStar = 0;
+  let oneStar = 0;
+
+  const fields = {
+    product: "",
+    name: "",
+    star: "",
+    description: "",
+  };
+  const [rateData, setRateData] = useState(fields);
   const [open, setOpen] = useState(false);
+
+  const { name, star, description } = rateData;
+
+  const handleChange = (name) => (event) => {
+    const value = event.target.value;
+    setRateData({ ...rateData, [name]: value });
+    setRateData({ ...rateData, [name]: value, product: params.productId });
+  };
+
+  const ratingClaculation = () => {
+    data.map((item) => {
+      if (item.star === "5") {
+        fiveStar += item.star.length;
+      }
+      if (item.star === "4") {
+        fourStar += item.star.length;
+      }
+      if (item.star === "3") {
+        threeStar += item.star.length;
+      }
+      if (item.star === "2") {
+        twoStar += item.star.length;
+      }
+      if (item.star === "1") {
+        oneStar += item.star.length;
+      }
+    });
+  };
+
+  ratingClaculation();
+
+  const onSubmit = (event) => {
+    event.preventDefault();
+
+    if (star && name && description) {
+      createRating(rateData).then((data) => {
+        setRateData({
+          ...rateData,
+          star: "",
+          name: "",
+          description: "",
+        });
+        handleClose();
+      });
+    } else {
+      alert("Please select and fill all fields");
+    }
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -38,6 +103,17 @@ const Ratings = () => {
     }, 1000);
   };
 
+  const starPercent = () => {
+    return (
+      (5 * fiveStar +
+        4 * fourStar +
+        3 * threeStar +
+        2 * twoStar +
+        1 * oneStar) /
+      (fiveStar + fourStar + threeStar + twoStar + oneStar)
+    );
+  };
+
   return (
     <div className="rating__main">
       <h6>Rating and Review</h6>
@@ -45,11 +121,13 @@ const Ratings = () => {
       <div className="rating__main__data">
         <div className="rating__people">
           <p className="rat_ing">
-            4.5
-            <i style={{ fontSize: "1.1rem" }} className="fas fa-star"></i>
+            {starPercent().toFixed(1)}
+            <StarRateRoundedIcon
+              style={{ fontSize: "2.4rem", color: "orange" }}
+            />
           </p>
           <p className="rat_ings">
-            88 Rating and <br /> Reviews
+            {`${data && data.length}`} Rating and <br /> Reviews
           </p>
         </div>
         <div className="rating__bar">
@@ -58,35 +136,52 @@ const Ratings = () => {
               <p>5</p>
               <i style={{ color: "grey" }} className="fas fa-star"></i>
             </div>
-            <Progress percent={100} showInfo={false} />
+            <Progress
+              percent={(fiveStar * 100) / data.length}
+              showInfo={false}
+            />
           </div>
           <div className="five__star__rating">
             <div className="five__star">
               <p>4</p>
               <i style={{ color: "grey" }} className="fas fa-star"></i>
             </div>
-            <Progress percent={60} showInfo={false} />
+            <Progress
+              percent={(fourStar * 100) / data.length}
+              showInfo={false}
+            />
           </div>
           <div className="five__star__rating">
             <div className="five__star">
               <p>3</p>
               <i style={{ color: "grey" }} className="fas fa-star"></i>
             </div>
-            <Progress percent={35} showInfo={false} />
+            <Progress
+              percent={(threeStar * 100) / data.length}
+              showInfo={false}
+            />
           </div>
           <div className="five__star__rating">
             <div className="five__star">
               <p>2</p>
               <i style={{ color: "grey" }} className="fas fa-star"></i>
             </div>
-            <Progress percent={25} status="exception" showInfo={false} />
+            <Progress
+              percent={(twoStar * 100) / data.length}
+              status="exception"
+              showInfo={false}
+            />
           </div>
           <div className="five__star__rating">
             <div className="five__star">
               <p>1</p>
               <i style={{ color: "grey" }} className="fas fa-star"></i>
             </div>
-            <Progress percent={5} showInfo={false} status="exception" />
+            <Progress
+              percent={(oneStar * 100) / data.length}
+              showInfo={false}
+              status="exception"
+            />
           </div>
         </div>
         <div className="rating__button">
@@ -113,23 +208,33 @@ const Ratings = () => {
               <Rating
                 style={{ fontSize: "2rem" }}
                 name="simple-controlled"
-                value={RateIt}
-                onChange={(event, newValue) => {
-                  setRateIt(newValue);
-                }}
+                value={star}
+                onChange={handleChange("star")}
               />
             </Box>
-            <textarea
-              placeholder="Please write Your feedback..."
-              className="textarea__input"
-              name=""
-              id=""
-              cols="25"
-              rows="5"
-            ></textarea>
+            <div className="text__fields">
+              <input
+                value={name}
+                onChange={handleChange("name")}
+                type="text"
+                placeholder="Name..."
+              />
+
+              <textarea
+                placeholder="Please write Your feedback..."
+                className="textarea__input"
+                name=""
+                id=""
+                cols="25"
+                rows="5"
+                onChange={handleChange("description")}
+                value={description}
+              ></textarea>
+            </div>
           </DialogContent>
+          <Divider />
           <DialogActions>
-            <Button onClick={handleClose}>SEND</Button>
+            <Button onClick={onSubmit}>SEND</Button>
           </DialogActions>
         </Dialog>
       </div>
