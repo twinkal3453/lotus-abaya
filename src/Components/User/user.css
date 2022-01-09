@@ -51,8 +51,46 @@
   font-size: 1rem;
   font-weight: 400;
 }
-@media only screen and (max-width: 770px) {
+.order__history {
+  margin: 1rem 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 1rem;
+}
+.order__history__card {
+  border-radius: 0.5rem;
+  background: white;
+  box-shadow: 0 0 1rem rgb(221, 221, 221);
+  padding: 0.5rem;
+}
+
+.order__history__card {
+  display: flex;
+}
+
+.order__image img {
+  width: 120px;
+}
+.order__content {
+  padding: 0 0.5rem;
+}
+.order__content h6 {
+  margin-bottom: 0.8rem;
+}
+.order__content p {
+  margin-bottom: 0;
+  margin-top: 0.3rem;
+}
+@media only screen and (max-width: 990px) {
   .personal__info__data {
+    grid-template-columns: 1fr;
+  }
+  .order__history {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media only screen and (max-width: 550px) {
+  .order__history {
     grid-template-columns: 1fr;
   }
 }

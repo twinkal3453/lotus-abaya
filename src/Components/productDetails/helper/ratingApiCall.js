@@ -14,7 +14,7 @@ export const getRate = (rateId) => {
 
 // GET RAGINGS
 export const getAllRates = () => {
-  return fetch(`{API}/ratings`, {
+  return fetch(`${API}/ratings`, {
     method: "GET",
   })
     .then((response) => {
