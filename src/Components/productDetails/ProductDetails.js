@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Radio from "@mui/material/Radio";
 import axios from "../../axios";
 import ProdCarousel from "./productCarousel/ProdCarousel";
-import { getAllRates } from "./helper/ratingApiCall";
+// import { getAllRates } from "./helper/ratingApiCall";
 import { Link } from "react-router-dom";
 import "./productDetails.css";
 import Ratings from "./Ratings/Ratings";

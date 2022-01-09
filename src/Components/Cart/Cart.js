@@ -19,12 +19,12 @@ import { createOrder } from "../productDetails/helper/orderHelper";
 const Cart = () => {
   const dispatch = useDispatch();
   const [products, setProducts] = useState([]);
-  const [data, setData] = useState({
-    loading: false,
-    success: false,
-    error: "",
-    address: "",
-  });
+  // const [data, setData] = useState({
+  //   loading: false,
+  //   success: false,
+  //   error: "",
+  //   address: "",
+  // });
 
   const { user, token } = isAuthenticated();
   const userId = user._id;
