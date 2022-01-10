@@ -88,6 +88,7 @@ const Cart = () => {
               transaction_id: data.id,
               amount: data.amount,
               address: data.billing_details.address,
+              type: data.payment_method_details.type,
             };
             console.log(orderData);
 
