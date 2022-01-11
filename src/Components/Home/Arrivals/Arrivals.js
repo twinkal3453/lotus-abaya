@@ -7,9 +7,11 @@ import { productList, selectProduct } from "../../../features/productSlice";
 import { wishListList } from "../../../features/wishListSlice";
 import { addItemToWishList } from "../../WishList/wishListHelper";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import { isAuthenticated } from "../../Auth/helper";
 import "./arrivals.css";
 
 const Arrivals = () => {
+  const { user } = isAuthenticated();
   const productData = useSelector(selectProduct);
   const dispatch = useDispatch();
 
@@ -46,13 +48,23 @@ const Arrivals = () => {
             return (
               <div className="prod__card" key={index}>
                 <div className="main_whish">
-                  <button
-                    style={{ border: "none", outline: "none" }}
-                    onClick={() => addsToWishList(item._id)}
-                    className="whish__list"
-                  >
-                    <FavoriteBorderOutlinedIcon />
-                  </button>
+                  {user ? (
+                    <button
+                      style={{ border: "none", outline: "none" }}
+                      onClick={() => addsToWishList(item._id)}
+                      className="whish__list"
+                    >
+                      <FavoriteBorderOutlinedIcon />
+                    </button>
+                  ) : (
+                    <Link
+                      style={{ border: "none", outline: "none" }}
+                      to="/login"
+                      className="whish__list"
+                    >
+                      <FavoriteBorderOutlinedIcon />
+                    </Link>
+                  )}
                 </div>
                 <Link to={`/productDetails/${item._id}`}>
                   <div className="img__sec">

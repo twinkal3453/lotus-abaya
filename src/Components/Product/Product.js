@@ -15,6 +15,7 @@ import Fab from "@mui/material/Fab";
 import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import ArrowBackIosNewRoundedIcon from "@mui/icons-material/ArrowBackIosNewRounded";
+import { isAuthenticated } from "../Auth/helper/index";
 
 import { Link } from "react-router-dom";
 import "./product.css";
@@ -23,6 +24,7 @@ import "antd/dist/antd.css";
 import { Slider, Checkbox } from "antd";
 
 const Product = () => {
+  const { user } = isAuthenticated();
   const categoryData = useSelector(selectCategory);
   const search = useLocation().search;
   const categoryId = new URLSearchParams(search).get("category");
@@ -318,12 +320,18 @@ const Product = () => {
                 <>
                   <div className="prod__section__card" key={index}>
                     <div className="spec__wish">
-                      <div
-                        onClick={() => addsToWishList(item._id)}
-                        className="spec__prod__wishlist"
-                      >
-                        <FavoriteBorderRoundedIcon />
-                      </div>
+                      {user ? (
+                        <div
+                          onClick={() => addsToWishList(item._id)}
+                          className="spec__prod__wishlist"
+                        >
+                          <FavoriteBorderRoundedIcon />
+                        </div>
+                      ) : (
+                        <Link to="/login" className="spec__prod__wishlist">
+                          <FavoriteBorderRoundedIcon />
+                        </Link>
+                      )}
                     </div>
                     <Link to={`/productDetails/${item._id}`}>
                       <img src={`${PATH}/${item.photos[0]}`} alt="" />

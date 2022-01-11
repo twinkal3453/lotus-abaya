@@ -165,9 +165,18 @@ const ProductDetails = ({
                 </div>
                 <div className="prod__name__share__se">
                   <LightTooltip title="Add to wishlist" arrow placement="top">
-                    <div onClick={addsTowishList} className="share__sec__wish">
-                      <FavoriteBorderRoundedIcon />
-                    </div>
+                    {user ? (
+                      <div
+                        onClick={addsTowishList}
+                        className="share__sec__wish"
+                      >
+                        <FavoriteBorderRoundedIcon />
+                      </div>
+                    ) : (
+                      <Link to="/login" className="share__sec__wish">
+                        <FavoriteBorderRoundedIcon />
+                      </Link>
+                    )}
                   </LightTooltip>
                   <LightTooltip title="Share" arrow placement="top">
                     <div className="share__sec__wish">
