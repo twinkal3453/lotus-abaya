@@ -16,10 +16,7 @@ const User = () => {
   const { user, token } = isAuthenticated();
   const id = user._id;
 
-  console.log(purchases);
-
   const calculation = (price, count, discount) => {
-    console.log(price, count, discount);
     return (price * count - (price * count * discount) / 100).toFixed(2);
   };
 

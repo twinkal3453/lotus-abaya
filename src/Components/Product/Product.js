@@ -50,6 +50,7 @@ const Product = () => {
     }
     setPages(pages + count);
   };
+
   const decreaseCount = (count) => {
     pages <= 2 ? setDisable(true) : setDisable(false);
     setPages(pages - count);
