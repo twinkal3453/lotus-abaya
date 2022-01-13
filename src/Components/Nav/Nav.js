@@ -15,11 +15,6 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 
-const linkStyle = {
-  color: "rgb(62, 62, 73)",
-  fontSize: "1.3rem",
-};
-
 const Nav = ({ history }) => {
   const cartLength = useSelector(selectCart);
   const wishListLength = useSelector(selectWishList);

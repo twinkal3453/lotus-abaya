@@ -47,7 +47,7 @@ const Ratings = ({ data }) => {
   };
 
   const ratingClaculation = () => {
-    data.map((item) => {
+    data.forEach((item) => {
       if (item.star === "5") {
         fiveStar += item.star.length;
       }

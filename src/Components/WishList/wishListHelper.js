@@ -26,7 +26,7 @@ export const removeItemFromWishList = (productId) => {
     if (localStorage.getItem("wishList")) {
       wishList = JSON.parse(localStorage.getItem("wishList"));
     }
-    wishList.map((product, i) => {
+    wishList.forEach((product, i) => {
       if (product._id === productId) {
         wishList.splice(i, 1);
       }

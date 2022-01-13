@@ -114,6 +114,7 @@ const ProductDetails = ({
     }
     fetchData();
     preload();
+    // eslint-disable-next-line
   }, [productId]);
 
   const handleColorChange = (event) => {

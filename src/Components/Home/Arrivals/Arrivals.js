@@ -23,7 +23,7 @@ const Arrivals = () => {
   };
 
   const addsToWishList = (productId) => {
-    productData.map((item) => {
+    productData.forEach((item) => {
       if (item._id === productId) {
         addItemToWishList(item);
         addingToRedux();

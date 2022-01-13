@@ -32,7 +32,7 @@ const Cart = () => {
 
   const getListingPrice = () => {
     const amount = [];
-    products.map((p) => {
+    products.forEach((p) => {
       amount.push(p.price * p.count);
     });
     let sum = amount.reduce((partial_amt, a) => partial_amt + a, 0);
@@ -41,7 +41,7 @@ const Cart = () => {
 
   const getDiscountPrice = () => {
     let amount = [];
-    products.map((p) => {
+    products.forEach((p) => {
       amount.push((p.price * p.count * p.discount) / 100);
     });
     let sum = amount.reduce((partial_amt, a) => partial_amt + a, 0);
@@ -50,7 +50,7 @@ const Cart = () => {
 
   const getFinalAmount = () => {
     let amount = [];
-    products.map((p) => {
+    products.forEach((p) => {
       amount.push(p.price * p.count - (p.price * p.count * p.discount) / 100);
     });
     let sum = amount.reduce((partial_amt, a) => partial_amt + a, 0);
@@ -90,7 +90,7 @@ const Cart = () => {
               address: data.billing_details.address,
               type: data.payment_method_details.type,
             };
-            console.log(orderData);
+            // console.log(orderData);
 
             createOrder(userId, userToken, orderData);
           })
@@ -117,6 +117,7 @@ const Cart = () => {
     getFinalAmount();
     getDiscountPrice();
     getListingPrice();
+    // eslint-disable-next-line
   }, []);
 
   const showStripeButton = () => {
@@ -129,7 +130,14 @@ const Cart = () => {
         shippingAddress
         billingAddress
       >
-        <button className="place__order">CHECKOUT</button>
+        {
+          <button
+            style={{ display: `${products.length === 0 ? "none" : "block"}` }}
+            className="place__order"
+          >
+            CHECKOUT
+          </button>
+        }
       </StripeCheckout>
     ) : (
       <Link to="/login">
@@ -186,7 +194,7 @@ const Cart = () => {
           )}
 
           <Divider />
-          {products ? showStripeButton() : ""}
+          {showStripeButton()}
         </div>
         <div className="price__section__port">
           <div className="price__section">

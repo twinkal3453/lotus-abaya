@@ -16,6 +16,13 @@ const User = () => {
   const { user, token } = isAuthenticated();
   const id = user._id;
 
+  console.log(purchases);
+
+  const calculation = (price, count, discount) => {
+    console.log(price, count, discount);
+    return (price * count - (price * count * discount) / 100).toFixed(2);
+  };
+
   const preloadedData = () => {
     getUser(id, token)
       .then((data) => {
@@ -24,8 +31,6 @@ const User = () => {
       })
       .catch((err) => console.log(err));
   };
-
-  console.log(purchases);
 
   const preload = () => {
     if (user) {
@@ -39,6 +44,7 @@ const User = () => {
   useEffect(() => {
     preload();
     preloadedData();
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -78,11 +84,17 @@ const User = () => {
                   <h6>{item.name}</h6>
 
                   <Chip
-                    label={`Price: $${item.amount / 100}`}
+                    label={`Final Price: $${calculation(
+                      item.price,
+                      item.quantity,
+                      item.discount
+                    )}`}
                     color="primary"
                     variant="outlined"
                   />
+                  <p>{`Listing Price: $${item.price}`}</p>
                   <p>{`Quantity: ${item.quantity}`}</p>
+                  <p>{`Discount: ${item.discount}%`}</p>
                 </div>
               </div>
             );

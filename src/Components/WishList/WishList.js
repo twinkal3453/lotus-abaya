@@ -28,6 +28,7 @@ const WishList = () => {
 
   useEffect(() => {
     preload();
+    // eslint-disable-next-line
   }, []);
 
   return (

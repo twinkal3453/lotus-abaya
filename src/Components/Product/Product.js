@@ -37,7 +37,7 @@ const Product = () => {
   const [disable, setDisable] = useState(false);
 
   const categoryNames = () => {
-    categoryData.map((item) => {
+    categoryData.forEach((item) => {
       if (item._id === categoryId) {
         setCategoryName(item.name);
       }
@@ -55,8 +55,6 @@ const Product = () => {
     setPages(pages - count);
   };
 
-  console.log(pages);
-
   const preload = () => {
     async function fetchData() {
       const req = await axios.get(`/products${search}`);
@@ -68,6 +66,7 @@ const Product = () => {
   useEffect(() => {
     preload();
     categoryNames();
+    // eslint-disable-next-line
   }, []);
 
   const addingToRedux = () => {
@@ -78,7 +77,7 @@ const Product = () => {
   };
 
   const addsToWishList = (productId) => {
-    products.map((item) => {
+    products.forEach((item) => {
       if (item._id === productId) {
         addItemToWishList(item);
         addingToRedux();
