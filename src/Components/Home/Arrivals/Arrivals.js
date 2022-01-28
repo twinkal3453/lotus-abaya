@@ -34,6 +34,7 @@ const Arrivals = () => {
   useEffect(() => {
     async function fetchData() {
       const req = await axios.get("/products?limit=12");
+      console.log(req.data);
       dispatch(productList(req.data));
     }
     fetchData();
@@ -43,8 +44,8 @@ const Arrivals = () => {
     <div className="container div__arrivals">
       <h1>Our Products</h1>
       <div className="prod__card__sec">
-        {productData &&
-          productData.map((item, index) => {
+        {productData.data &&
+          productData.data.map((item, index) => {
             return (
               <div className="prod__card" key={index}>
                 <div className="main_whish">

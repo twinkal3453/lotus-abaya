@@ -11,10 +11,8 @@ import { addItemToWishList } from "../WishList/wishListHelper";
 import { useDispatch, useSelector } from "react-redux";
 import { wishListList } from "../../features/wishListSlice";
 import { selectCategory } from "../../features/categorySlice";
-import Fab from "@mui/material/Fab";
 import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
-import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
-import ArrowBackIosNewRoundedIcon from "@mui/icons-material/ArrowBackIosNewRounded";
+import Pagination from "@mui/material/Pagination";
 import { isAuthenticated } from "../Auth/helper/index";
 
 import { Link } from "react-router-dom";
@@ -23,7 +21,7 @@ import "./product.css";
 import "antd/dist/antd.css";
 import { Slider, Checkbox } from "antd";
 
-const Product = () => {
+const Product = ({ history }) => {
   const { user } = isAuthenticated();
   const categoryData = useSelector(selectCategory);
   const search = useLocation().search;
@@ -33,8 +31,6 @@ const Product = () => {
   const [priceValue, setPriceValue] = useState([20, 50]);
   const [expanded, setExpanded] = React.useState("panel1");
   const [categoryName, setCategoryName] = useState("");
-  const [pages, setPages] = useState(1);
-  const [disable, setDisable] = useState(false);
 
   const categoryNames = () => {
     categoryData.forEach((item) => {
@@ -44,16 +40,11 @@ const Product = () => {
     });
   };
 
-  const increaseCount = (count) => {
-    if (pages >= 1) {
-      setDisable(false);
-    }
-    setPages(pages + count);
-  };
-
-  const decreaseCount = (count) => {
-    pages <= 2 ? setDisable(true) : setDisable(false);
-    setPages(pages - count);
+  const handleChangePage = (event, value) => {
+    history.push({
+      pathname: "/product",
+      search: `?page=${value}`,
+    });
   };
 
   const preload = () => {
@@ -68,7 +59,7 @@ const Product = () => {
     preload();
     categoryNames();
     // eslint-disable-next-line
-  }, []);
+  }, [search]);
 
   const addingToRedux = () => {
     if (typeof window !== undefined) {
@@ -299,7 +290,7 @@ const Product = () => {
         <div className="prof__list__card">
           <div className="first__heading">
             <h5>{`${categoryName ? categoryName : "Products"} (${
-              products.length
+              products.pagination && products.pagination.count
             })`}</h5>
             <select
               defaultValue="New Arrival"
@@ -315,69 +306,61 @@ const Product = () => {
 
           {/* Product card Section */}
           <div className="prod__card__section">
-            {products.map((item, index) => {
-              return (
-                <>
-                  <div className="prod__section__card" key={index}>
-                    <div className="spec__wish">
-                      {user ? (
-                        <div
-                          onClick={() => addsToWishList(item._id)}
-                          className="spec__prod__wishlist"
-                        >
-                          <FavoriteBorderRoundedIcon />
-                        </div>
-                      ) : (
-                        <Link to="/login" className="spec__prod__wishlist">
-                          <FavoriteBorderRoundedIcon />
-                        </Link>
-                      )}
-                    </div>
-                    <Link to={`/productDetails/${item._id}`}>
-                      <img src={`${PATH}/${item.photos[0]}`} alt="" />
-
-                      <div className="spec__prod__discount">
-                        <p>{`${item.discount}% Off`}</p>
+            {products.data &&
+              products.data.map((item, index) => {
+                return (
+                  <>
+                    <div className="prod__section__card" key={index}>
+                      <div className="spec__wish">
+                        {user ? (
+                          <div
+                            onClick={() => addsToWishList(item._id)}
+                            className="spec__prod__wishlist"
+                          >
+                            <FavoriteBorderRoundedIcon />
+                          </div>
+                        ) : (
+                          <Link to="/login" className="spec__prod__wishlist">
+                            <FavoriteBorderRoundedIcon />
+                          </Link>
+                        )}
                       </div>
+                      <Link to={`/productDetails/${item._id}`}>
+                        <img src={`${PATH}/${item.photos[0]}`} alt="" />
 
-                      <div className="spec__prod__price">
-                        <div className="prod__name__price">
-                          <h6>{item.name}</h6>
-                          <p>
-                            <span className="actual__price">{`$${item.price}`}</span>
-                            {`$${(
-                              item.price -
-                              item.price * (item.discount / 100)
-                            ).toFixed(2)}`}
-                          </p>
+                        <div className="spec__prod__discount">
+                          <p>{`${item.discount}% Off`}</p>
                         </div>
-                        {/* <div className="prod__cart__icon">
+
+                        <div className="spec__prod__price">
+                          <div className="prod__name__price">
+                            <h6>{item.name}</h6>
+                            <p>
+                              <span className="actual__price">{`$${item.price}`}</span>
+                              {`$${(
+                                item.price -
+                                item.price * (item.discount / 100)
+                              ).toFixed(2)}`}
+                            </p>
+                          </div>
+                          {/* <div className="prod__cart__icon">
                         <i className="fas fa-shopping-basket"></i>
                       </div> */}
-                      </div>
-                    </Link>
-                  </div>
-                </>
-              );
-            })}
+                        </div>
+                      </Link>
+                    </div>
+                  </>
+                );
+              })}
           </div>
           <div className="pagination__parent">
             <div className="pagination__sec">
-              <Fab
-                disabled={disable}
-                onClick={() => decreaseCount(1)}
-                style={{ height: "3rem", width: "3rem" }}
-                aria-label="add"
-              >
-                <ArrowBackIosNewRoundedIcon />
-              </Fab>
-              <Fab
-                onClick={() => increaseCount(1)}
-                style={{ height: "3rem", width: "3rem" }}
-                aria-label="add"
-              >
-                <ArrowForwardIosRoundedIcon />
-              </Fab>
+              <Pagination
+                color="primary"
+                variant="outlined"
+                count={products.pagination && products.pagination.totalPage}
+                onChange={handleChangePage}
+              />
             </div>
           </div>
         </div>

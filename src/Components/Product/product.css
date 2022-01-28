@@ -179,8 +179,6 @@
 }
 
 .pagination__sec {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
   grid-gap: 0.5rem;
   background: white;
   padding: 0.5rem;
