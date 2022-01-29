@@ -1,14 +1,82 @@
-import React from "react";
+import React, { useState } from "react";
 import "./contact.css";
 import communicate from "../../assets/communicate.png";
+import { RECAPTCHA } from "../../backend";
+import ReCAPTCHA from "react-google-recaptcha";
+import { createContact } from "./contactApiCall";
 
 const input_style = {
   fontStyle: "italic",
 };
 
 const Contact = () => {
+  const [contactUs, setContactUs] = useState({
+    name: "",
+    email: "",
+    mobile: "",
+    message: "",
+    sending: false,
+  });
+
+  const { name, email, mobile, message, sending } = contactUs;
+
+  console.log(contactUs);
+
+  const [variefy, setVariefy] = useState({
+    isVariefied: false,
+  });
+  const { isVariefied } = variefy;
+
+  const handleChange = (name) => (event) => {
+    const value = event.target.value;
+    setContactUs({ ...contactUs, [name]: value });
+  };
+
+  const onChange = (response) => {
+    if (response) {
+      setVariefy({
+        isVariefied: true,
+      });
+    }
+  };
+
   const submitForm = (e) => {
     e.preventDefault();
+
+    if (name === "") {
+      alert("Name must be filled");
+    } else if (email === "") {
+      alert("Email must be filled");
+    } else if (mobile === "") {
+      alert("mobile must be filled");
+    } else if (message === "") {
+      alert("message must be filled");
+    } else if (isVariefied === false) {
+      alert("Captcha not variefied");
+    }
+
+    if (name && email && mobile && message && isVariefied === true) {
+      setContactUs({ ...contactUs, sending: true });
+      createContact(contactUs).then((data) => {
+        setContactUs({
+          ...contactUs,
+          name: "",
+          email: "",
+          mobile: "",
+          message: "",
+        });
+      });
+    }
+  };
+
+  const sendingMessage = () => {
+    return (
+      sending && (
+        <div className="alert alert-info">
+          <h4>Sending...</h4>
+        </div>
+      )
+    );
   };
 
   return (
@@ -26,23 +94,47 @@ const Contact = () => {
         <div className="contactus__input__page">
           <div className="contact__input">
             <h5>Contact us</h5>
+            {sendingMessage()}
             <form>
               <div className="name__email">
-                <input style={input_style} type="text" placeholder="Name..." />
                 <input
+                  onChange={handleChange("name")}
+                  value={name}
+                  style={input_style}
+                  type="text"
+                  placeholder="Name..."
+                />
+                <input
+                  onChange={handleChange("email")}
+                  value={email}
                   style={input_style}
                   type="email"
                   placeholder="Email..."
                 />
               </div>
-              <input style={input_style} type="text" placeholder="Mobile..." />
+              <input
+                onChange={handleChange("mobile")}
+                value={mobile}
+                style={input_style}
+                type="text"
+                placeholder="Mobile..."
+              />
               <textarea
+                onChange={handleChange("message")}
+                value={message}
                 style={input_style}
                 rows="5"
                 type="text"
                 placeholder="Message..."
               />
-              <button onClick={submitForm}>Alright Submit it</button>
+              <ReCAPTCHA
+                className="captcha"
+                sitekey={RECAPTCHA}
+                onChange={onChange}
+              />
+              <button style={{ marginTop: "1rem" }} onClick={submitForm}>
+                Alright Submit it
+              </button>
             </form>
           </div>
           <div className="contact__address">
