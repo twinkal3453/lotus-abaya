@@ -34,7 +34,6 @@ const Arrivals = () => {
   useEffect(() => {
     async function fetchData() {
       const req = await axios.get("/products?limit=12");
-      console.log(req.data);
       dispatch(productList(req.data));
     }
     fetchData();

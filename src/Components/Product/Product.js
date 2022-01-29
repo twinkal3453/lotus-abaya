@@ -356,7 +356,7 @@ const Product = ({ history }) => {
           <div className="pagination__parent">
             <div className="pagination__sec">
               <Pagination
-                color="primary"
+                color="error"
                 variant="outlined"
                 count={products.pagination && products.pagination.totalPage}
                 onChange={handleChangePage}
