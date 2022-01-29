@@ -61,6 +61,7 @@ input {
   color: white;
   padding: 0.7rem 1rem;
   border: none;
+  outline: none;
 }
 .contact__address {
   background: rgb(214, 36, 36);
