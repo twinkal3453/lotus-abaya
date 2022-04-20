@@ -69,7 +69,7 @@ const Product = ({ history }) => {
   };
 
   const addsToWishList = (productId) => {
-    products.forEach((item) => {
+    products.data.forEach((item) => {
       if (item._id === productId) {
         addItemToWishList(item);
         addingToRedux();

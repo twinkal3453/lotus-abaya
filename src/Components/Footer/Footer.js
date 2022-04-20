@@ -62,7 +62,7 @@ const Footer = () => {
               <ul>
                 <li>Paymant</li>
                 <li>Shipping</li>
-                <li>Cancellation & Return</li>
+                <li>Cancelation & Return</li>
                 <li>FAQ</li>
               </ul>
             </div>
