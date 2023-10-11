@@ -1,14 +1,16 @@
-import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "../../../axios";
+import React, { useEffect } from "react";
 import { PATH } from "../../../backend";
 import { useDispatch, useSelector } from "react-redux";
 import { productList, selectProduct } from "../../../features/productSlice";
 import { wishListList } from "../../../features/wishListSlice";
 import { addItemToWishList } from "../../WishList/wishListHelper";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import { isAuthenticated } from "../../Auth/helper";
 import "./arrivals.css";
+import returnDistinctData from "../../../utils/includeWishlist";
 
 const Arrivals = () => {
   const { user } = isAuthenticated();
@@ -54,7 +56,11 @@ const Arrivals = () => {
                       onClick={() => addsToWishList(item._id)}
                       className="whish__list"
                     >
-                      <FavoriteBorderOutlinedIcon />
+                      {returnDistinctData(item._id) ? (
+                        <FavoriteIcon style={{ color: "pink" }} />
+                      ) : (
+                        <FavoriteBorderOutlinedIcon />
+                      )}
                     </button>
                   ) : (
                     <Link

@@ -60,8 +60,8 @@ const WishList = () => {
           {wishListData && wishListData.length !== 0 ? (
             wishListData.map((item, index) => {
               return (
-                <>
-                  <div className=" wishlist__card card__whole" key={index}>
+                <div key={index}>
+                  <div className=" wishlist__card card__whole">
                     <Link to={`productDetails/${item._id}`}>
                       <div className="card__main">
                         <img
@@ -91,7 +91,7 @@ const WishList = () => {
                       />
                     </div>
                   </div>
-                </>
+                </div>
               );
             })
           ) : (
